@@ -47,7 +47,9 @@ function EachRow(props: { datesOfWeek: Date[] }) {
   return (
     <tr>
       {props.datesOfWeek ? (
-        props.datesOfWeek.map((value, key) => <td>{value.getDay() === 5}</td>)
+        props.datesOfWeek.map((value, key) => (
+          <td key={key}>{value.getDay() === 5}</td>
+        ))
       ) : (
         <td></td>
       )}
