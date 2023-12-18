@@ -4,6 +4,8 @@ import {
 } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiHelpCircle } from "react-icons/bi";
+import useTitle from "../layout/useTitle";
+import Title from "./Title";
 
 export default function Navbar() {
   return (
@@ -11,7 +13,7 @@ export default function Navbar() {
       <div className="flex flex-row justify-between py-4 px-3 xl:w-2/3 mx-auto">
         <div className="flex items-center space-x-5">
           <BsReverseLayoutSidebarInsetReverse size={30} color="#dc2626" />
-          <h1 className="text-3xl text-white font-semibold">Today</h1>
+          <Title />
         </div>
         <div className="flex items-center space-x-5">
           <AiOutlineSearch color="#d1d5db" size={30} />
