@@ -15,6 +15,7 @@ import { FormEvent, FormEventHandler, useEffect, useState } from "react";
 import { User } from "@prisma/client";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { exit, exitCode } from "process";
+import { toast } from "react-toastify";
 
 export default function SignUpForm() {
   const [user, setUser] = useState<Omit<User, "id">>({
@@ -37,7 +38,9 @@ export default function SignUpForm() {
   }
 
   async function onSubmit() {
-    await createUser(user);
+    (await createUser(user))
+      ? toast.success("Berhasil Sign Up")
+      : toast.error("Gagal Sign Up");
   }
 
   useEffect(() => {

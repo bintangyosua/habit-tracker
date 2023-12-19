@@ -4,9 +4,15 @@ import prisma from "@/libs/db/prisma";
 import { User } from "@prisma/client";
 
 export async function createUser(data: Omit<User, "id">) {
-  await prisma.user.create({
-    data,
-  });
+  try {
+    const req = await prisma.user.create({
+      data,
+    });
+
+    return req ? true : false;
+  } catch (error) {
+    return false;
+  }
 }
 
 export async function getEmails(email: string) {
