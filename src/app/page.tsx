@@ -1,5 +1,5 @@
 import Navbar from "@/libs/components/Navbar/Navbar";
-import { getSession } from "@/libs/auth/session";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
   const metadata = {
@@ -7,6 +7,7 @@ export default function Home() {
   };
   return (
     <main className="bg-zinc-100 h-screen flex flex-col justify-start text-black">
+      <ToastContainer position="top-center" />
       <Navbar />
     </main>
   );

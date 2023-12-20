@@ -1,10 +1,17 @@
+"use server";
+
 import { BiCheckCircle, BiClipboard, BiDotsVertical } from "react-icons/bi";
 import { BsCalendar2Week, BsFillHospitalFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
+import NewHabit from "../Rightbar/NewHabit";
+import { getKategori } from "@/libs/db/services";
 
-export default function Habits() {
+export default async function Habits() {
   return (
-    <div className="flex flex-col space-y-3">
+    <div className="flex flex-col gap-3">
+      <div className="xl:hidden">
+        <NewHabit />
+      </div>
       <Habit />
       <Habit />
       <Habit />
@@ -14,7 +21,7 @@ export default function Habits() {
 
 function Habit() {
   return (
-    <div className="bg-zinc-900 rounded-xl px-5 py-3 flex flex-col space-y-3">
+    <div className="bg-zinc-900 rounded-xl px-5 py-3 flex flex-col mt-0">
       {/* Header */}
       <Header />
       <div className="flex justify-evenly space-x-1">

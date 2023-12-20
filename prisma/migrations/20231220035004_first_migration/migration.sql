@@ -39,17 +39,20 @@ CREATE TABLE "Kategori" (
 CREATE TABLE "Habit" (
     "id" SERIAL NOT NULL,
     "nama" TEXT NOT NULL,
-    "kategori_id" INTEGER NOT NULL,
+    "kategoriId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "deskripsi" TEXT NOT NULL,
 
     CONSTRAINT "Habit_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "UsersOnHabits" (
-    "userId" INTEGER NOT NULL,
+CREATE TABLE "Hari" (
     "habitId" INTEGER NOT NULL,
+    "tanggal" TIMESTAMP(3) NOT NULL,
+    "checked" BOOLEAN NOT NULL,
 
-    CONSTRAINT "UsersOnHabits_pkey" PRIMARY KEY ("userId","habitId")
+    CONSTRAINT "Hari_pkey" PRIMARY KEY ("habitId")
 );
 
 -- CreateIndex
@@ -62,10 +65,10 @@ ALTER TABLE "UsersOnRoles" ADD CONSTRAINT "UsersOnRoles_userId_fkey" FOREIGN KEY
 ALTER TABLE "UsersOnRoles" ADD CONSTRAINT "UsersOnRoles_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Habit" ADD CONSTRAINT "Habit_kategori_id_fkey" FOREIGN KEY ("kategori_id") REFERENCES "Kategori"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Habit" ADD CONSTRAINT "Habit_kategoriId_fkey" FOREIGN KEY ("kategoriId") REFERENCES "Kategori"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UsersOnHabits" ADD CONSTRAINT "UsersOnHabits_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Habit" ADD CONSTRAINT "Habit_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UsersOnHabits" ADD CONSTRAINT "UsersOnHabits_habitId_fkey" FOREIGN KEY ("habitId") REFERENCES "Habit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Hari" ADD CONSTRAINT "Hari_habitId_fkey" FOREIGN KEY ("habitId") REFERENCES "Habit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

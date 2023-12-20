@@ -12,7 +12,7 @@ export default function SignOut() {
       variant="soft"
       onClick={() => {
         deleteSession();
-        toast.error("Berhasil Log Out");
+        toast.error("Berhasil Sign Out");
       }}>
       Sign Out
     </Button>

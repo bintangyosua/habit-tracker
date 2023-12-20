@@ -24,7 +24,7 @@ model User {
   tanggal_lahir DateTime
   kota          String
   roles         UsersOnRoles[]
-  habits        UsersOnHabits[]
+  habits        Habit[]
 }
 
 model UsersOnRoles {
@@ -46,16 +46,19 @@ model Kategori {
 model Habit {
   id          Int             @id @default(autoincrement())
   nama        String
-  kategori    Kategori        @relation(fields: [kategori_id], references: [id])
-  kategori_id Int
-  users       UsersOnHabits[]
+  kategori    Kategori        @relation(fields: [kategoriId], references: [id])
+  kategoriId Int
+  user        User            @relation(fields: [userId], references: [id])
+  hari        Hari[]    
+  userId     Int
+  deskripsi   String
 }
 
-model UsersOnHabits {
-  user    User  @relation(fields: [userId], references: [id])
-  userId  Int
+model Hari {
   habit   Habit @relation(fields: [habitId], references: [id])
   habitId Int
+  tanggal DateTime
+  checked Boolean
 
-  @@id([userId, habitId])
+  @@id([habitId])
 }
