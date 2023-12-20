@@ -2,6 +2,7 @@
 
 import { Habit } from "@prisma/client";
 import prisma from "./prisma";
+import getDay from "date-fns/getDay/index.js";
 
 export const getKategori = async () => {
   return await prisma.kategori.findMany();
@@ -34,10 +35,24 @@ export const getHabit = async (habitId: number) => {
 };
 
 export const getToday = async (habitId: number) => {
+  const date = new Date();
+  const currentDate = new Date(
+    Date.UTC(
+      2023,
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds()
+    )
+  );
+  currentDate.setHours(0, 0, 0, 0);
+  console.log(getDay(currentDate));
   return await prisma.hari.findFirst({
     where: {
       habitId,
-      tanggal: new Date(),
+      // tanggal: currentDate,
     },
     include: {
       habit: {

@@ -37,6 +37,8 @@ async function Habit(props: {
   sessionId: number;
 }) {
   const habitWithKategori = await getHabit(props.habit.id);
+  const today = await getToday(props.habit.id);
+  console.log(today);
 
   const selectedIcon = kategoriIcons.find(
     (val) => val.name === habitWithKategori?.kategori?.nama
@@ -61,7 +63,10 @@ async function Habit(props: {
           {habitWithKategori?.kategori.nama}
         </p>
       </div>
-      <AiOutlineCheckCircle color={false ? "green" : "gray"} size={40} />
+      <AiOutlineCheckCircle
+        color={today?.checked ? "green" : "gray"}
+        size={40}
+      />
     </div>
   );
 }
