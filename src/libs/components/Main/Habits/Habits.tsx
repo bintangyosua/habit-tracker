@@ -17,6 +17,7 @@ import { IconLayout } from "./Icons";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { MdSportsMartialArts, MdWorkOutline } from "react-icons/md";
 import { TiPlus } from "react-icons/ti";
+import { kategoriIcons } from "@/libs/kateogori_icons/kategoriIcons";
 
 const getHabitKategori = async (id: number) => {
   return getHabitsCateogryById(id);
@@ -65,25 +66,6 @@ function Habit({ habit }: { habit: HabitType }) {
 async function Header({ habit }: { habit: HabitType }) {
   const kategori = await getHabitKategori(habit.kategoriId);
 
-  const kategoriIcons = [
-    {
-      name: "Hobi",
-      component: IoGameControllerOutline,
-    },
-    {
-      name: "Olahraga",
-      component: MdSportsMartialArts,
-    },
-    {
-      name: "Pekerjaan",
-      component: MdWorkOutline,
-    },
-    {
-      name: "Kesehatan",
-      component: TiPlus,
-    },
-  ];
-
   const selectedIcon = kategoriIcons.find((val) => val.name === kategori?.nama);
   const iconComponent = selectedIcon ? selectedIcon.component : null;
 
@@ -95,7 +77,6 @@ async function Header({ habit }: { habit: HabitType }) {
           {kategori?.nama}
         </span>
       </div>
-      {/* {kategoriIcons.find((val) => val.name === kategori?.nama)?.component} */}
       <IconLayout key={kategori?.id} Icon={iconComponent} kategori={kategori} />
     </div>
   );

@@ -16,5 +16,38 @@ export const createHabit = async (habit: Omit<Habit, "id">) => {
 };
 
 export const getHabits = async (userId: number) => {
-  return await prisma.habit.findMany({ where: { userId } });
+  return await prisma.habit.findMany({
+    where: { userId },
+    include: {
+      kategori: true,
+    },
+  });
 };
+
+export const getHabit = async (habitId: number) => {
+  return await prisma.habit.findFirst({
+    where: { id: habitId },
+    include: {
+      kategori: true,
+    },
+  });
+};
+
+export const getToday = async (habitId: number) => {
+  return await prisma.hari.findFirst({
+    where: {
+      habitId,
+      tanggal: new Date(),
+    },
+    include: {
+      habit: {
+        include: {
+          kategori: true,
+        },
+      },
+    },
+  });
+};
+
+export type TodayWithHabit = ReturnType<typeof getToday>;
+export type HabitWithKategori = ReturnType<typeof getHabit>;
