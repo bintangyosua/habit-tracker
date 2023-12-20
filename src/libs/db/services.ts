@@ -14,3 +14,7 @@ export const createHabit = async (habit: Omit<Habit, "id">) => {
 
   return req ? true : false;
 };
+
+export const getHabits = async (userId: number) => {
+  return await prisma.habit.findMany({ where: { userId } });
+};
