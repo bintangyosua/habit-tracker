@@ -31,6 +31,7 @@ CREATE TABLE "UsersOnRoles" (
 CREATE TABLE "Kategori" (
     "id" SERIAL NOT NULL,
     "nama" TEXT NOT NULL,
+    "warna" TEXT,
 
     CONSTRAINT "Kategori_pkey" PRIMARY KEY ("id")
 );
@@ -52,7 +53,7 @@ CREATE TABLE "Hari" (
     "tanggal" TIMESTAMP(3) NOT NULL,
     "checked" BOOLEAN NOT NULL,
 
-    CONSTRAINT "Hari_pkey" PRIMARY KEY ("habitId")
+    CONSTRAINT "Hari_pkey" PRIMARY KEY ("habitId","tanggal")
 );
 
 -- CreateIndex

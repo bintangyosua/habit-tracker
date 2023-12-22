@@ -1,11 +1,16 @@
 "use client";
 
-import { setSession } from "@/libs/auth/session";
+import {
+  getSession,
+  setSession as setServerSession,
+} from "@/libs/auth/session";
 import { Button, Dialog, Flex, TextField, Text } from "@radix-ui/themes";
 import { useState } from "react";
 import { signIn } from "./actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import { useSession } from "@/libs/zustand/Session";
+import { useHabit } from "@/libs/zustand/Habit";
 
 export default function SignInForm() {
   const [user, setUser] = useState<{
@@ -25,10 +30,15 @@ export default function SignInForm() {
     });
   }
 
+  const setSession = useSession((state) => state.setSession);
+  const clientSession = useSession((state) => state.session);
+
   async function handleSubmit() {
     if (await signIn(user.email, user.password)) {
       toast.success("Berhasil Sign In!");
-      await setSession(user.email);
+      await setServerSession(user.email);
+      const session = await getSession();
+      setSession();
     } else {
       toast.error("Email atau Password salah!");
     }

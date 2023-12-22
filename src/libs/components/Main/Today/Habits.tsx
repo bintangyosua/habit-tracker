@@ -1,33 +1,36 @@
+"use server";
+
 import { GiHealthNormal } from "react-icons/gi";
 import { IconType } from "react-icons";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import {
+  HabitWithKategori,
+  getHabit,
+  getHabits,
+  getTodays,
+} from "@/libs/db/services";
+import { getSession } from "@/libs/auth/session";
+import { Habit as HabitType } from "@prisma/client";
+import { TodayWithHabit, getToday } from "@/libs/db/services";
+import { kategoriIcons } from "@/libs/kateogori_icons/kategoriIcons";
+import { IconLayout } from "../Habits/Icons";
+import { Button } from "@radix-ui/themes";
+import { CheckCircledIcon } from "@radix-ui/react-icons";
+import CheckIcon from "./CheckIcon";
+import UpdateHabits from "./UpdateHabits";
+import { getCurrentDate } from "./actions";
 
 export default async function Habits() {
+  const session = await getSession();
+  const habits = await getHabits(session.id);
+  const todays = await getTodays(session.id);
   return (
     <div className="flex flex-col py-5">
-      <Habit icon={GiHealthNormal} title="Evening Bath" checked={true} />
-      <Habit icon={GiHealthNormal} title="Reading Book" checked={true} />
-      <Habit icon={GiHealthNormal} title="Gymnasium" checked={false} />
-      <Habit icon={GiHealthNormal} title="Meditation" checked={false} />
-    </div>
-  );
-}
-
-function Habit(props: { icon: IconType; title: string; checked: boolean }) {
-  return (
-    <div className="flex justify-between space-x-5 items-center border-b border-zinc-500 py-3">
-      {props.icon({
-        color: "green",
-        size: 30,
-      })}
-      <div className="flex flex-col text-left w-full">
-        <p>{props.title}</p>
-        <p className="text-sm text-green-500">Habit</p>
-      </div>
-      <AiOutlineCheckCircle
-        color={props.checked ? "green" : "gray"}
-        size={40}
-      />
+      {habits ? (
+        <UpdateHabits session={session} habits={habits} />
+      ) : (
+        <p>Habit tidak ditemukan</p>
+      )}
     </div>
   );
 }

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma migrate dev; npx prisma generate; next build",
+    "build": "npx prisma migrate deploy; npx prisma generate; next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -21,6 +21,7 @@
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
     "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "iron-session": "^8.0.1",

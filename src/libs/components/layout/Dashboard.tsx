@@ -4,6 +4,7 @@ import Navbar from "../Main/Navbar";
 import Rightbar from "../Main/Rightbar/Rightbar";
 import Sidebar from "../Main/Sidebar/Sidebar";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 export default function DashboardLayout({
   children,

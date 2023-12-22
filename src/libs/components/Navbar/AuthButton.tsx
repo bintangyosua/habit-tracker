@@ -5,6 +5,7 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import SignOut from "./SignOut";
 import { getSession } from "@/libs/auth/session";
+import ClickMe from "./ClickMe";
 
 async function AuthButton() {
   return (
@@ -17,6 +18,7 @@ async function AuthButton() {
             Dashboard
           </a>
           <SignOut />
+          <ClickMe />
         </>
       ) : (
         <>
