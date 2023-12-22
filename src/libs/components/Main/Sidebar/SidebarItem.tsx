@@ -8,7 +8,7 @@ export default async function SidebarItem(props: {
   url: string;
 }) {
   return (
-    <Link
+    <a
       href={props.url}
       className={`px-4 py-3 flex space-x-3 hover:bg-zinc-800 ${
         props.title === props.active ? "text-white font-extrabold pl-6" : ""
@@ -18,6 +18,6 @@ export default async function SidebarItem(props: {
         color: props.title === props.active ? "white" : "#d1d5db",
       })}
       <span>{props.title}</span>
-    </Link>
+    </a>
   );
 }

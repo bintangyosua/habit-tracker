@@ -4,14 +4,14 @@ import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
 import { getUser } from "../components/Navbar/actions";
 
-export type Session = {
+export type SessionType = {
   email: string;
   isSignedIn: boolean;
   id: number;
 };
 
 export async function setSession(email: string) {
-  const session = await getIronSession<Session>(cookies(), {
+  const session = await getIronSession<SessionType>(cookies(), {
     password: "vsfZ7hdzLUmW6feA46Bi1jBZp1pHRgx6",
     cookieName: "habifier",
   });
@@ -26,16 +26,22 @@ export async function setSession(email: string) {
 }
 
 export async function getSession() {
-  const session = getIronSession<Session>(cookies(), {
+  const session = getIronSession<SessionType>(cookies(), {
     password: "vsfZ7hdzLUmW6feA46Bi1jBZp1pHRgx6",
     cookieName: "habifier",
   });
 
-  return session;
+  const data: SessionType = {
+    email: (await session).email,
+    id: (await session).id,
+    isSignedIn: (await session).isSignedIn,
+  };
+
+  return data;
 }
 
 export async function deleteSession() {
-  const session = await getIronSession<Session>(cookies(), {
+  const session = await getIronSession<SessionType>(cookies(), {
     password: "vsfZ7hdzLUmW6feA46Bi1jBZp1pHRgx6",
     cookieName: "habifier",
   });

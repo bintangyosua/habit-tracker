@@ -2,7 +2,6 @@
 
 import prisma from "@/libs/db/prisma";
 import { Habit, Kategori } from "@prisma/client";
-import { ChatBubbleIcon } from "@radix-ui/react-icons";
 import {
   Avatar,
   Box,
@@ -21,6 +20,8 @@ import { getKategori } from "./actions";
 import { createHabit } from "@/libs/db/services";
 import { toast } from "react-toastify";
 import { getSession } from "@/libs/auth/session";
+import { useHabit } from "@/libs/zustand/Habit";
+import { useRouter } from "next/navigation";
 
 export default function NewHabit() {
   const [kategori, setKategori] = useState<Kategori[]>();
@@ -29,6 +30,10 @@ export default function NewHabit() {
     deskripsi: " ",
     userId: 0,
   });
+
+  const { newHabit, setNewHabit } = useHabit((state) => state);
+
+  const router = useRouter();
 
   const [select, setSelect] = useState<number>(
     typeof kategori === "undefined" ? 1 : kategori[0].id
@@ -55,14 +60,20 @@ export default function NewHabit() {
 
   async function handleSubmit() {
     if (enabled) {
-      (await createHabit({
-        nama: habit.nama,
-        kategoriId: parseInt(String(select)),
-        deskripsi: habit.deskripsi,
-        userId: habit.userId,
-      }))
-        ? toast.success("Berhasil membuat habit baru.")
-        : toast.error("Gagal membuat habit baru.");
+      if (
+        await createHabit({
+          nama: habit.nama,
+          kategoriId: parseInt(String(select)),
+          deskripsi: habit.deskripsi,
+          userId: habit.userId,
+        })
+      ) {
+        toast.success("Berhasil membuat habit baru.");
+        setNewHabit(true);
+        router.refresh();
+      } else {
+        toast.error("Gagal membuat habit baru.");
+      }
     } else {
       toast.error("Gagal membuat habit baru.");
     }

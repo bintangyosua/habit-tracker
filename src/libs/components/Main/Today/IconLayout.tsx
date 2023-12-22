@@ -1,10 +1,10 @@
-"use client";
+"use server";
 
 import { IconType } from "react-icons";
 import React, { ReactElement } from "react";
 import { Kategori } from "@prisma/client";
 
-export function IconLayout({
+export async function IconLayout({
   Icon,
   kategori,
 }: {

@@ -28,7 +28,7 @@ model User {
 }
 
 model UsersOnRoles {
-  user       User     @relation(fields: [userId], references: [id])
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
   role       Role     @relation(fields: [roleId], references: [id])
   roleId     Int
@@ -47,19 +47,19 @@ model Kategori {
 model Habit {
   id          Int             @id @default(autoincrement())
   nama        String
-  kategori    Kategori        @relation(fields: [kategoriId], references: [id])
-  kategoriId Int
-  user        User            @relation(fields: [userId], references: [id])
+  kategori    Kategori        @relation(fields: [kategoriId], references: [id]) 
+  kategoriId Int              
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   hari        Hari[]    
   userId     Int
   deskripsi   String
 }
 
 model Hari {
-  habit   Habit @relation(fields: [habitId], references: [id])
+  habit   Habit  @relation(fields: [habitId], references: [id], onDelete: Cascade)
   habitId Int
   tanggal DateTime
   checked Boolean
 
-  @@id([habitId])
+  @@id([habitId, tanggal])
 }
