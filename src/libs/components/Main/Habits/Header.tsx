@@ -8,6 +8,7 @@ import { useHabit } from "@/libs/zustand/Habit";
 import { useEffect, useState } from "react";
 import { HabitWithKategori } from "@/libs/db/services";
 import Svg from "../../SVGLayouts/Svg";
+import { format } from "date-fns";
 
 export default function Header({ habit }: { habit: HabitWithKategori }) {
   const selectedIcon = kategoriIcons.find(
@@ -18,12 +19,18 @@ export default function Header({ habit }: { habit: HabitWithKategori }) {
   return (
     <div className="flex justify-between items-center">
       <div className="flex flex-col">
-        <span className="font-medium">{habit.nama}</span>
+        <span className="font-medium">
+          {habit.nama} -{" "}
+          <span className="font-thin text-sm">
+            Start Date: {`${format(habit.tanggalMulai, "dd MMM yyyy")}`}
+          </span>{" "}
+        </span>
         <span
           className={`text-sm`}
           style={{ color: `${habit.kategori?.warna}` }}>
           {habit.kategori.nama}
         </span>
+        <span></span>
       </div>
       <Svg path={habit.kategori.svgIcon} color={habit.kategori.warna} />
     </div>

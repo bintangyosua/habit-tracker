@@ -15,8 +15,8 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import { useRouter } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { BiChevronLeftSquare, BiChevronRightSquare } from "react-icons/bi";
 import { CgChevronDoubleDown } from "react-icons/cg";
 
@@ -32,12 +32,25 @@ export default function Example() {
 
   const { setSelectedDate } = useHabit((state) => state);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     setSelectedDate(selectedDay);
-    console.log(selectedDay);
+    router.push(
+      "?" + createQueryString("tanggalMulai", selectedDay.toISOString())
+    );
     router.refresh();
   }, [selectedDay]);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, format(parseISO(value), "yyyy-MM-dd"));
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,

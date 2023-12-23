@@ -16,35 +16,19 @@ import { useHabit } from "@/libs/zustand/Habit";
 import { getCurrentDate } from "./actions";
 import { IconLayout } from "./IconLayout";
 import Svg from "../../SVGLayouts/Svg";
+import { useSearchParams } from "next/navigation";
+import ClientHabit from "./ClientHabit";
 
 export default async function Habit(props: {
-  icon: IconType;
   habit: HabitWithKategori;
   sessionId: number;
 }) {
   const today = await getToday(props.habit.id, getCurrentDate());
-  const selectedIcon = kategoriIcons.find(
-    (val) => val.name === props.habit?.kategori?.nama
-  );
-  const iconComponent = selectedIcon ? selectedIcon.component : <></>;
-
   return (
-    <div className="flex justify-between space-x-5 items-center border-b border-zinc-500 py-3">
-      <Svg
-        path={props.habit.kategori.svgIcon}
-        color={props.habit.kategori.warna}
-      />
-      <div className="flex flex-col text-left w-full">
-        <p>{props.habit?.nama}</p>
-        <p
-          className="text-sm"
-          style={{
-            color: props.habit.kategori.warna || "gray",
-          }}>
-          {props.habit.kategori.nama}
-        </p>
-      </div>
-      <CheckIcon today={today} habit={props.habit} />
-    </div>
+    <ClientHabit
+      today={today}
+      habit={props.habit}
+      sessionId={props.sessionId}
+    />
   );
 }
