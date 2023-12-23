@@ -8,7 +8,7 @@ export default function toastContainer({
 }) {
   return (
     <div>
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" theme="dark" />
       {children}
     </div>
   );

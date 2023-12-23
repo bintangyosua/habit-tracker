@@ -3,6 +3,8 @@
 import { useSession } from "@/libs/zustand/Session";
 import { Theme } from "@radix-ui/themes";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
   children?: React.ReactNode;

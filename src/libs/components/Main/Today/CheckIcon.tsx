@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { getCurrentDate } from "./actions";
 import { Habit } from "@prisma/client";
 import { useHabit } from "@/libs/zustand/Habit";
+import { startOfToday } from "date-fns";
 
 export default function CheckIcon(props: {
   today: TodayWithHabit | null;
@@ -41,12 +42,14 @@ export default function CheckIcon(props: {
         height={40}
         onClick={() => {
           if (!checked) {
-            const newToday = createToday({
+            createToday({
               habitId: props.habit.id,
               tanggal: getCurrentDate(),
               checked: true,
             });
           } else {
+            console.log({ date: startOfToday() });
+            console.log({ dateDB: props.today?.tanggal });
             deleteToday(props.habit.id, getCurrentDate());
           }
           setChecked(!checked);

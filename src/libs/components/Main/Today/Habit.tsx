@@ -25,23 +25,23 @@ export default async function Habit(props: {
   const selectedIcon = kategoriIcons.find(
     (val) => val.name === props.habit?.kategori?.nama
   );
-  const iconComponent = selectedIcon ? selectedIcon.component : null;
+  const iconComponent = selectedIcon ? selectedIcon.component : <></>;
 
   return (
     <div className="flex justify-between space-x-5 items-center border-b border-zinc-500 py-3">
       <IconLayout
         key={props.habit?.kategori?.id}
         Icon={iconComponent}
-        kategori={props.habit?.kategori ? props.habit.kategori : null}
+        kategori={props.habit.kategori}
       />
       <div className="flex flex-col text-left w-full">
         <p>{props.habit?.nama}</p>
         <p
           className="text-sm"
           style={{
-            color: props.habit?.kategori.warna || "gray",
+            color: props.habit.kategori.warna || "gray",
           }}>
-          {props.habit?.kategori.nama}
+          {props.habit.kategori.nama}
         </p>
       </div>
       <CheckIcon today={today} habit={props.habit} />

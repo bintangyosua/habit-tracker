@@ -41,7 +41,7 @@ model Kategori {
   id     Int     @id @default(autoincrement())
   nama   String
   habits Habit[]
-  warna   String?
+  warna   String
 }
 
 model Habit {

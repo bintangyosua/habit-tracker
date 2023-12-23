@@ -9,7 +9,7 @@ export async function IconLayout({
   kategori,
 }: {
   Icon: IconType;
-  kategori: Kategori | null;
+  kategori: Kategori;
 }) {
-  return <Icon style={{ color: kategori?.warna || "gray" }} size={30} />;
+  return <Icon style={{ color: kategori.warna }} size={30} />;
 }

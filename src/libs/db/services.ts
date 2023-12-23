@@ -86,6 +86,25 @@ export const deleteToday = async (habitId: number, tanggal: Date) => {
   });
 };
 
+export const getUsers = async () => {
+  return await prisma.user.findMany();
+};
+
+export const createCategory = async (data: Omit<Kategori, "id">) => {
+  return await prisma.kategori.create({
+    data,
+  });
+};
+
+export const editCategory = async (data: Kategori) => {
+  return await prisma.kategori.update({
+    where: {
+      id: data.id,
+    },
+    data,
+  });
+};
+
 // export type TodayWithHabit = ReturnType<typeof getToday>;
 // export type HabitWithKategori = ReturnType<typeof getHabit>;
 export type HabitWithKategori = {

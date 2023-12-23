@@ -7,7 +7,7 @@ export default function Home() {
   };
   return (
     <main className="bg-zinc-100 h-screen flex flex-col justify-start text-black">
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" theme="dark" />
       <Navbar />
     </main>
   );

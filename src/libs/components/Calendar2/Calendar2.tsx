@@ -1,5 +1,6 @@
 "use client";
 
+import { useHabit } from "@/libs/zustand/Habit";
 import {
   add,
   eachDayOfInterval,
@@ -14,7 +15,8 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import { Fragment, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Fragment, useEffect, useState } from "react";
 import { BiChevronLeftSquare, BiChevronRightSquare } from "react-icons/bi";
 import { CgChevronDoubleDown } from "react-icons/cg";
 
@@ -27,6 +29,15 @@ export default function Example() {
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
+
+  const { setSelectedDate } = useHabit((state) => state);
+  const router = useRouter();
+
+  useEffect(() => {
+    setSelectedDate(selectedDay);
+    console.log(selectedDay);
+    router.refresh();
+  }, [selectedDay]);
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
