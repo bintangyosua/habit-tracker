@@ -7,6 +7,8 @@ import { Habit as HabitType } from "@prisma/client";
 import Habit from "./Habit";
 import { useEffect, useState } from "react";
 import { useHabit } from "@/libs/zustand/Habit";
+import { Callout } from "@radix-ui/themes";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 export default async function UpdateHabits({
   session,
@@ -27,7 +29,12 @@ export default async function UpdateHabits({
           />
         ))
       ) : (
-        <p className="text-white">Habit tidak ditemukan</p>
+        <Callout.Root color="red">
+          <Callout.Icon>
+            <InfoCircledIcon />
+          </Callout.Icon>
+          <Callout.Text>Belum memiliki Habit</Callout.Text>
+        </Callout.Root>
       )}
     </>
   );

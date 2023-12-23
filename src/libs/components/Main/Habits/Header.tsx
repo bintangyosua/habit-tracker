@@ -7,6 +7,7 @@ import { Habit as HabitType, Kategori } from "@prisma/client";
 import { useHabit } from "@/libs/zustand/Habit";
 import { useEffect, useState } from "react";
 import { HabitWithKategori } from "@/libs/db/services";
+import Svg from "../../SVGLayouts/Svg";
 
 export default function Header({ habit }: { habit: HabitWithKategori }) {
   const selectedIcon = kategoriIcons.find(
@@ -24,11 +25,7 @@ export default function Header({ habit }: { habit: HabitWithKategori }) {
           {habit.kategori.nama}
         </span>
       </div>
-      <IconLayout
-        key={habit.id}
-        Icon={iconComponent}
-        kategori={habit.kategori}
-      />
+      <Svg path={habit.kategori.svgIcon} color={habit.kategori.warna} />
     </div>
   );
 }

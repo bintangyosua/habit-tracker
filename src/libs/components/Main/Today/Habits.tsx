@@ -26,11 +26,7 @@ export default async function Habits() {
   const todays = await getTodays(session.id);
   return (
     <div className="flex flex-col py-5">
-      {habits ? (
-        <UpdateHabits session={session} habits={habits} />
-      ) : (
-        <p>Habit tidak ditemukan</p>
-      )}
+      {habits && <UpdateHabits session={session} habits={habits} />}
     </div>
   );
 }

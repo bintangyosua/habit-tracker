@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useHabit } from "@/libs/zustand/Habit";
 import { getCurrentDate } from "./actions";
 import { IconLayout } from "./IconLayout";
+import Svg from "../../SVGLayouts/Svg";
 
 export default async function Habit(props: {
   icon: IconType;
@@ -29,10 +30,9 @@ export default async function Habit(props: {
 
   return (
     <div className="flex justify-between space-x-5 items-center border-b border-zinc-500 py-3">
-      <IconLayout
-        key={props.habit?.kategori?.id}
-        Icon={iconComponent}
-        kategori={props.habit.kategori}
+      <Svg
+        path={props.habit.kategori.svgIcon}
+        color={props.habit.kategori.warna}
       />
       <div className="flex flex-col text-left w-full">
         <p>{props.habit?.nama}</p>

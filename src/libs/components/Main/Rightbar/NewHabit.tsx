@@ -138,14 +138,17 @@ export default function NewHabit() {
                   defaultValue={`${
                     typeof kategori === "undefined" ? 1 : kategori[0].id
                   }`}>
-                  <Select.Trigger />
+                  <Select.Trigger color="green" />
                   <Select.Content
                     position="popper"
                     color="green"
                     variant="soft">
                     {kategori &&
                       kategori.map((val) => (
-                        <Select.Item key={val.id} value={`${val.id}`}>
+                        <Select.Item
+                          color="green"
+                          key={val.id}
+                          value={`${val.id}`}>
                           {val.nama}
                         </Select.Item>
                       ))}

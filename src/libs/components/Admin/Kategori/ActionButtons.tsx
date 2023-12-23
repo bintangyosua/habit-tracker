@@ -10,7 +10,7 @@ export default function ActionButtons({ kategori }: { kategori: Kategori }) {
   return (
     <div className="flex gap-3">
       <EditKategori kategori={kategori}>
-        <IconButton color="violet" disabled>
+        <IconButton color="violet">
           <BiSolidEdit width="18" height="18" />
         </IconButton>
       </EditKategori>

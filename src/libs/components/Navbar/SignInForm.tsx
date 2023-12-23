@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { useSession } from "@/libs/zustand/Session";
 import { useHabit } from "@/libs/zustand/Habit";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function SignInForm() {
   const [user, setUser] = useState<{
@@ -30,15 +32,15 @@ export default function SignInForm() {
     });
   }
 
+  const router = useRouter();
   const setSession = useSession((state) => state.setSession);
   const clientSession = useSession((state) => state.session);
 
   async function handleSubmit() {
     if (await signIn(user.email, user.password)) {
-      toast.success("Berhasil Sign In!");
       await setServerSession(user.email);
-      const session = await getSession();
       setSession();
+      toast.success("Berhasil Sign In!");
     } else {
       toast.error("Email atau Password salah!");
     }
