@@ -10,6 +10,7 @@ import {
   TextField,
   Text,
   IconButton,
+  TextArea,
 } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -25,6 +26,7 @@ export default function EditKategori({
 }) {
   const [color, setColor] = useState(kategori.warna);
   const [nama, setNama] = useState(kategori.nama);
+  const [svgIcon, setSvgIcon] = useState(kategori.svgIcon);
 
   const router = useRouter();
   return (
@@ -61,11 +63,28 @@ export default function EditKategori({
                 }}></div>
             </Flex>
           </label>
+          <label>
+            <Text as="div" size="2" mb="1" weight="bold">
+              SVG Icon
+            </Text>
+            <TextArea
+              placeholder="Masukkan path svg icon"
+              onChange={(e) => setNama(e.target.value)}
+              defaultValue={kategori.svgIcon}
+              rows={10}
+            />
+          </label>
           <Popover.Close>
             <Button
               size="2"
+              color="violet"
               onClick={async () => {
-                await editCategory({ id: kategori.id, nama, warna: color });
+                await editCategory({
+                  id: kategori.id,
+                  nama,
+                  warna: color,
+                  svgIcon,
+                });
                 router.refresh();
                 toast.success("Berhasil mengedit kategori");
               }}>

@@ -11,6 +11,7 @@ import {
   Text,
 } from "@tremor/react";
 import ActionButtons from "./ActionButtons";
+import Svg from "../../SVGLayouts/Svg";
 
 export default async function TableKategori() {
   const kategori = await getKategori();
@@ -21,6 +22,7 @@ export default async function TableKategori() {
           <TableHeaderCell className="p-4">#</TableHeaderCell>
           <TableHeaderCell>Nama</TableHeaderCell>
           <TableHeaderCell>Accent</TableHeaderCell>
+          <TableHeaderCell>Icon</TableHeaderCell>
           <TableHeaderCell>Actions</TableHeaderCell>
         </TableRow>
       </TableHead>
@@ -43,6 +45,9 @@ export default async function TableKategori() {
                     &nbsp;
                   </div>
                 )}
+              </TableCell>
+              <TableCell>
+                <Svg path={item.svgIcon} color={item.warna} />
               </TableCell>
               <TableCell>
                 <ActionButtons kategori={item} />

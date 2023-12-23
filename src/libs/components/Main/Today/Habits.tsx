@@ -14,16 +14,16 @@ import { Habit as HabitType } from "@prisma/client";
 import { TodayWithHabit, getToday } from "@/libs/db/services";
 import { kategoriIcons } from "@/libs/kateogori_icons/kategoriIcons";
 import { IconLayout } from "../Habits/Icons";
-import { Button } from "@radix-ui/themes";
-import { CheckCircledIcon } from "@radix-ui/react-icons";
+import { Button, Callout } from "@radix-ui/themes";
+import { CheckCircledIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import CheckIcon from "./CheckIcon";
 import UpdateHabits from "./UpdateHabits";
 import { getCurrentDate } from "./actions";
+import Habit from "./Habit";
 
 export default async function Habits() {
   const session = await getSession();
   const habits = await getHabits(session.id);
-  const todays = await getTodays(session.id);
   return (
     <div className="flex flex-col py-5">
       {habits ? (

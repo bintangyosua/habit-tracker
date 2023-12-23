@@ -8,6 +8,6 @@ export const BarList = [
   [BsNewspaper, "Today", "/dashboard"],
   [IoIosMedal, "Habits", "/dashboard/habits"],
   [MdOutlineTaskAlt, "Tasks", "/dashboard/tasks"],
-  [TbCategory2, "Chat", "/dashboard/chat"],
+  // [TbCategory2, "Chat", "/dashboard/chat"],
   [CgProfile, "Profile", "/dashboard/profile"],
 ];

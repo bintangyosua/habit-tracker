@@ -1,23 +1,14 @@
 "use client";
 
-import {
-  Button,
-  Dialog,
-  Flex,
-  TextField,
-  Text,
-  Callout,
-  AlertDialog,
-  Badge,
-} from "@radix-ui/themes";
+import { Button, Dialog, Flex, TextField, Text, Badge } from "@radix-ui/themes";
 import { createUser, getEmails } from "./actions";
-import { Form } from "@radix-ui/react-form";
-import { FormEvent, FormEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "@prisma/client";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { exit, exitCode } from "process";
+import { exit } from "process";
 import { toast } from "react-toastify";
-import DatePicker from "../DatePicker/DatePicker";
+import { useRouter } from "next/navigation";
+import { setSession as setServerSession } from "@/libs/auth/session";
+import { useSession } from "@/libs/zustand/Session";
 
 export default function SignUpForm() {
   const [user, setUser] = useState<Omit<User, "id">>({
@@ -28,7 +19,9 @@ export default function SignUpForm() {
     tanggal_lahir: new Date(),
   });
 
+  const router = useRouter();
   const [exist, setExist] = useState(false);
+  const { setSession } = useSession((state) => state);
 
   function handleInputChange(e: any) {
     const { name, value } = e.target;
@@ -52,12 +45,15 @@ export default function SignUpForm() {
 
   async function handleSubmit() {
     if (enabled) {
-      (await createUser(user))
-        ? toast.success("Berhasil Sign Up")
-        : toast.error("Gagal Sign Up! Email telah digunakan");
+      if (await createUser(user)) {
+        await setServerSession(user.email);
+        setSession();
+        toast.success("Berhasil Sign Up");
+      } else {
+        toast.error("Gagal Sign Up! Email telah digunakan");
+      }
     } else {
       toast.error("Gagal Sign Up!");
-      exit();
     }
   }
 

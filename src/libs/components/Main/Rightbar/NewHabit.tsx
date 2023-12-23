@@ -15,13 +15,14 @@ import {
   TextField,
   Select,
 } from "@radix-ui/themes";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getKategori } from "./actions";
 import { createHabit } from "@/libs/db/services";
 import { toast } from "react-toastify";
 import { getSession } from "@/libs/auth/session";
 import { useHabit } from "@/libs/zustand/Habit";
 import { useRouter } from "next/navigation";
+import { getCurrentDate, toZeroZero } from "../Today/actions";
 
 export default function NewHabit() {
   const [kategori, setKategori] = useState<Kategori[]>();
@@ -29,6 +30,7 @@ export default function NewHabit() {
     nama: " ",
     deskripsi: " ",
     userId: 0,
+    tanggalMulai: getCurrentDate(),
   });
 
   const { newHabit, setNewHabit } = useHabit((state) => state);
@@ -47,13 +49,15 @@ export default function NewHabit() {
     setSelect(e);
   }
 
-  async function handleInputChange(e: any) {
+  async function handleInputChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     const { name, value } = e.target;
 
     const session = await getSession();
     setHabit({
       ...habit,
-      [name]: value,
+      [name]: name === "tanggalMulai" ? toZeroZero(new Date(value)) : value,
       userId: session.id,
     });
   }
@@ -66,6 +70,7 @@ export default function NewHabit() {
           kategoriId: parseInt(String(select)),
           deskripsi: habit.deskripsi,
           userId: habit.userId,
+          tanggalMulai: habit.tanggalMulai,
         })
       ) {
         toast.success("Berhasil membuat habit baru.");
@@ -138,14 +143,17 @@ export default function NewHabit() {
                   defaultValue={`${
                     typeof kategori === "undefined" ? 1 : kategori[0].id
                   }`}>
-                  <Select.Trigger />
+                  <Select.Trigger color="green" />
                   <Select.Content
                     position="popper"
                     color="green"
                     variant="soft">
                     {kategori &&
                       kategori.map((val) => (
-                        <Select.Item key={val.id} value={`${val.id}`}>
+                        <Select.Item
+                          color="green"
+                          key={val.id}
+                          value={`${val.id}`}>
                           {val.nama}
                         </Select.Item>
                       ))}
@@ -160,6 +168,18 @@ export default function NewHabit() {
                   placeholder="Tambahkan deskripsi"
                   color="green"
                   name="deskripsi"
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label className="w-2/4">
+                <Text as="div" size="2" mb="1" weight="bold">
+                  Tanggal Mulai
+                </Text>
+                <TextField.Input
+                  type="date"
+                  color="green"
+                  placeholder="Masukkan tanggal mulai"
+                  name="tanggalMulai"
                   onChange={handleInputChange}
                 />
               </label>

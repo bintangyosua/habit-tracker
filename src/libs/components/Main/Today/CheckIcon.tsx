@@ -12,6 +12,7 @@ import { getCurrentDate } from "./actions";
 import { Habit } from "@prisma/client";
 import { useHabit } from "@/libs/zustand/Habit";
 import { startOfToday } from "date-fns";
+import { useRouter } from "next/navigation";
 
 export default function CheckIcon(props: {
   today: TodayWithHabit | null;
@@ -19,6 +20,8 @@ export default function CheckIcon(props: {
 }) {
   const [hover, setHover] = useState(false);
   const [checked, setChecked] = useState(props.today?.checked);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (props.today) {
@@ -48,11 +51,10 @@ export default function CheckIcon(props: {
               checked: true,
             });
           } else {
-            console.log({ date: startOfToday() });
-            console.log({ dateDB: props.today?.tanggal });
             deleteToday(props.habit.id, getCurrentDate());
           }
           setChecked(!checked);
+          router.refresh();
         }}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
