@@ -1,5 +1,5 @@
 import { IoGameControllerOutline } from "react-icons/io5";
-import { MdSportsMartialArts, MdWorkOutline } from "react-icons/md";
+import { MdMovie, MdSportsMartialArts, MdWorkOutline } from "react-icons/md";
 import { TiPlus } from "react-icons/ti";
 
 export const kategoriIcons = [
@@ -18,5 +18,9 @@ export const kategoriIcons = [
   {
     name: "Kesehatan",
     component: TiPlus,
+  },
+  {
+    name: "Hiburan",
+    component: MdMovie,
   },
 ];
