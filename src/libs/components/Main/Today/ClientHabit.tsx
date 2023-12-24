@@ -27,7 +27,10 @@ export default function ClientHabit(props: {
   const akhir = new Date(date);
 
   useEffect(() => {
-    getToday(props.habit.id, akhir).then((res) => setToday(res));
+    getToday(props.habit.id, akhir).then((res: Hari | null) => {
+      console.log({ res });
+      setToday(res);
+    });
   }, [tgl]);
   return (
     <>
@@ -47,7 +50,7 @@ export default function ClientHabit(props: {
               {props.habit.kategori.nama}
             </p>
           </div>
-          <CheckIcon today={props.today} habit={props.habit} date={akhir} />
+          <CheckIcon today={today} habit={props.habit} date={akhir} />
         </div>
       )}
     </>
