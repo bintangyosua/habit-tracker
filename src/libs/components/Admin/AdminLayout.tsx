@@ -17,11 +17,11 @@ export default async function AdminLayout({
     },
   });
 
-  if (!userRole) {
-    console.log("bukan admin");
+  if (!session.isSignedIn) {
+    return <h1>Perlu Login</h1>;
+  } else if (userRole == null) {
     return <h1>Bukan Admin</h1>;
   } else {
-    console.log("Admin");
     return (
       <main>
         <ToastContainer position="top-center" theme="light" />

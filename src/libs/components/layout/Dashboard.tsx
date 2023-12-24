@@ -1,3 +1,5 @@
+"use server";
+
 import { ToastContainer } from "react-toastify";
 import Footer from "../Main/Footer/Footer";
 import Navbar from "../Main/Navbar";
@@ -5,14 +7,16 @@ import Rightbar from "../Main/Rightbar/Rightbar";
 import Sidebar from "../Main/Sidebar/Sidebar";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { getSession } from "@/libs/auth/session";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
   pageName,
 }: {
   children: React.ReactNode;
   pageName: string;
 }) {
+  const session = await getSession();
   return (
     <main className="bg-zinc-950 h-screen flex flex-col justify-between">
       <div>
