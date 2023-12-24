@@ -18,3 +18,8 @@ Aplikasi Habit Tracker berbasis Web
 
 1. Ketikkan `npx prisma studio` di terminal
 2. Pergi ke `http://localhost:5555`
+
+## Akun Admin
+
+Email: admin@gg.com
+Password: admin
