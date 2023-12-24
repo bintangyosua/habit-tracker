@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma migrate resolve --rollback-back '20231223053905_first_migration'; npx prisma generate; next build",
+    "build": "npx prisma migrate deploy; npx prisma generate; next build",
     "start": "next start",
     "lint": "next lint"
   },
