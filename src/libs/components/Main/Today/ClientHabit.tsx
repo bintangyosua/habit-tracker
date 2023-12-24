@@ -1,22 +1,34 @@
 "use client";
 
 import Svg from "../../SVGLayouts/Svg";
-import { HabitWithKategori, TodayWithHabit } from "@/libs/db/services";
+import {
+  HabitWithKategori,
+  TodayWithHabit,
+  getToday,
+} from "@/libs/db/services";
 import CheckIcon from "./CheckIcon";
 import { useSearchParams } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import { getCurrentDate } from "./actions";
+import { useEffect, useState } from "react";
+import { Hari } from "@prisma/client";
 
 export default function ClientHabit(props: {
-  today: TodayWithHabit | null;
+  today: Hari | null;
   habit: HabitWithKategori;
   sessionId: number;
 }) {
+  const [today, setToday] = useState(props.today);
+
   const searchParams = useSearchParams();
-  const tgl =
-    searchParams.get("tanggalMulai") || getCurrentDate().toISOString();
+  const tgl = searchParams.get("tanggal") || getCurrentDate().toISOString();
+
   const date = format(parseISO(tgl), "yyyy-MM-dd");
   const akhir = new Date(date);
+
+  useEffect(() => {
+    getToday(props.habit.id, akhir).then((res) => setToday(res));
+  }, [tgl]);
   return (
     <>
       {props.habit.tanggalMulai > akhir ? null : (
@@ -35,7 +47,7 @@ export default function ClientHabit(props: {
               {props.habit.kategori.nama}
             </p>
           </div>
-          <CheckIcon today={props.today} habit={props.habit} />
+          <CheckIcon today={props.today} habit={props.habit} date={akhir} />
         </div>
       )}
     </>

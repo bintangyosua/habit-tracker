@@ -24,3 +24,17 @@ export class Day {
     return this.dayAbbreviations[date.getDay()];
   }
 }
+
+export function getDatesAround(date: Date) {
+  const offsets = [-6, -5, -4, -3, -2, -1, 0];
+
+  const dates = offsets.map((offset) => {
+    const newDate = new Date(date);
+    newDate.setDate(date.getDate() + offset);
+    return newDate;
+  });
+
+  return dates;
+}
+
+export const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

@@ -9,25 +9,18 @@ import {
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import React, { useEffect, useState } from "react";
 import { getCurrentDate } from "./actions";
-import { Habit } from "@prisma/client";
-import { useHabit } from "@/libs/zustand/Habit";
-import { startOfToday } from "date-fns";
-import { useRouter } from "next/navigation";
+import { Habit, Hari } from "@prisma/client";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function CheckIcon(props: {
-  today: TodayWithHabit | null;
+  today: Hari | null;
   habit: Habit;
+  date: Date;
 }) {
   const [hover, setHover] = useState(false);
-  const [checked, setChecked] = useState(props.today?.checked);
+  const [checked, setChecked] = useState(props.today?.checked || false);
 
   const router = useRouter();
-
-  useEffect(() => {
-    if (props.today) {
-      setChecked(props.today.checked);
-    }
-  }, []);
 
   return (
     <div className="hover:cursor-pointer">
@@ -53,7 +46,7 @@ export default function CheckIcon(props: {
           } else {
             deleteToday(props.habit.id, getCurrentDate());
           }
-          setChecked(!checked);
+          setChecked(!props.today?.checked);
           router.refresh();
         }}
         onMouseOver={() => setHover(true)}

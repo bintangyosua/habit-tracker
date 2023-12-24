@@ -48,3 +48,13 @@ export async function getUser(email: string) {
 
   return user;
 }
+
+export async function emailExist(email: string) {
+  const user = await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+
+  return user ? true : false;
+}

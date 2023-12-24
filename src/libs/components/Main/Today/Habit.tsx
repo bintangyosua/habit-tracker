@@ -1,7 +1,7 @@
 "use server";
 
 import { IconType } from "react-icons";
-import { Habit as HabitType } from "@prisma/client";
+import { Habit as HabitType, Hari } from "@prisma/client";
 import {
   HabitWithKategori,
   TodayWithHabit,

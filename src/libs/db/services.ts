@@ -43,13 +43,6 @@ export const getToday = async (habitId: number, date: Date) => {
       habitId,
       tanggal: date,
     },
-    include: {
-      habit: {
-        include: {
-          kategori: true,
-        },
-      },
-    },
   });
 };
 

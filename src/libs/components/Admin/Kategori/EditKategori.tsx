@@ -69,7 +69,7 @@ export default function EditKategori({
             </Text>
             <TextArea
               placeholder="Masukkan path svg icon"
-              onChange={(e) => setNama(e.target.value)}
+              onChange={(e) => setSvgIcon(e.target.value)}
               defaultValue={kategori.svgIcon}
               rows={10}
             />
