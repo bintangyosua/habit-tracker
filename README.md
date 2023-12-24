@@ -17,4 +17,4 @@ Aplikasi Habit Tracker berbasis Web
 ## Tutorial Membuka Dashboard Prisma
 
 1. Ketikkan `npx prisma studio` di terminal
-2. Pergi ke `http://localhost:5000`
+2. Pergi ke `http://localhost:5555`
