@@ -6,7 +6,7 @@ import {
 } from "@/libs/auth/session";
 import { Button, Dialog, Flex, TextField, Text } from "@radix-ui/themes";
 import { useState } from "react";
-import { signIn } from "./actions";
+import { emailExist, signIn } from "./actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { useSession } from "@/libs/zustand/Session";
@@ -37,12 +37,16 @@ export default function SignInForm() {
   const clientSession = useSession((state) => state.session);
 
   async function handleSubmit() {
-    if (await signIn(user.email, user.password)) {
-      await setServerSession(user.email);
-      setSession();
-      toast.success("Berhasil Sign In!");
+    if (await emailExist(user.email)) {
+      if (await signIn(user.email, user.password)) {
+        await setServerSession(user.email);
+        setSession();
+        toast.success("Berhasil Sign In!");
+      } else {
+        toast.error("Password salah!");
+      }
     } else {
-      toast.error("Email atau Password salah!");
+      toast.error("Email tidak terdaftar");
     }
   }
 

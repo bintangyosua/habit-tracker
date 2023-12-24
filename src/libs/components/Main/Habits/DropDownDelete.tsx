@@ -12,6 +12,8 @@ import {
 import { BiDotsVertical } from "react-icons/bi";
 import { deleteHabitById } from "./actions";
 import { useHabit } from "@/libs/zustand/Habit";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function DropDownDelete({
   habit,
@@ -38,10 +40,13 @@ export default function DropDownDelete({
 
 function DeleteAlert({ habit }: { habit: HabitWithKategori }) {
   const { setNewHabit } = useHabit((state) => state);
+  const router = useRouter();
 
   async function handleDelete() {
     deleteHabitById(habit);
     setNewHabit(true);
+    router.refresh();
+    toast.error("Berhasil menghapus habit");
   }
 
   return (

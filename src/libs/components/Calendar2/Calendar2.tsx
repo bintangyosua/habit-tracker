@@ -36,9 +36,7 @@ export default function Example() {
 
   useEffect(() => {
     setSelectedDate(selectedDay);
-    router.push(
-      "?" + createQueryString("tanggalMulai", selectedDay.toISOString())
-    );
+    router.push("?" + createQueryString("tanggal", selectedDay.toISOString()));
     router.refresh();
   }, [selectedDay]);
 

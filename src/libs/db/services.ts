@@ -43,13 +43,6 @@ export const getToday = async (habitId: number, date: Date) => {
       habitId,
       tanggal: date,
     },
-    include: {
-      habit: {
-        include: {
-          kategori: true,
-        },
-      },
-    },
   });
 };
 
@@ -69,7 +62,6 @@ export const getTodays = async (habitId: number) => {
 };
 
 export const createToday = async (today: Hari) => {
-  today.tanggal = currentDate;
   return await prisma.hari.create({
     data: today,
   });

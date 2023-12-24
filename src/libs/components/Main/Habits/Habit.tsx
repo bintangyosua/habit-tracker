@@ -1,13 +1,15 @@
-"use client";
+"use server";
 
-import { Day, sevenDaysArray } from "./Day";
+import { Day, days, getDatesAround, sevenDaysArray } from "./Day";
 import Footer from "./Footer";
 import Header from "./Header";
-import Date from "./Date";
+import EachDate from "./EachDate";
 import { Habit as HabitType } from "@prisma/client";
 import { HabitWithKategori } from "@/libs/db/services";
+import { getTodaysAround } from "./actions";
 
-export default function Habit({ habit }: { habit: HabitWithKategori }) {
+export default async function Habit({ habit }: { habit: HabitWithKategori }) {
+  const dates = getDatesAround(new Date());
   const day = new Day();
   return (
     <div className="bg-zinc-900 rounded-xl px-5 py-3 flex flex-col mt-0 gap-2">
@@ -15,14 +17,19 @@ export default function Habit({ habit }: { habit: HabitWithKategori }) {
       <Header habit={habit} />
       {/* Body */}
       <div className="flex justify-evenly gap-2">
-        {sevenDaysArray.map((val, key) => (
-          <Date
-            key={key}
-            day={day.getDay(val)}
-            dateNow={val.getDate()}
-            active={false}
-          />
-        ))}
+        {dates &&
+          dates.map((val, key) => {
+            return (
+              <EachDate
+                date={val}
+                key={key}
+                dateNow={val.getDate()}
+                active={false}
+                habitId={habit.id}
+                day={days[val.getDay()]}
+              />
+            );
+          })}
       </div>
       {/* Footer */}
       <Footer habit={habit} />

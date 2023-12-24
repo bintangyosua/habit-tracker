@@ -1,18 +1,41 @@
+"use client";
+
+import { format, parseISO } from "date-fns";
+import { useSearchParams } from "next/navigation";
+import { days, getCurrentDate, getDatesAround } from "./actions";
+
 export default function Dates() {
+  const searchParams = useSearchParams();
+  const tgl = searchParams.get("tanggal") || getCurrentDate().toISOString();
+  const date = format(parseISO(tgl), "yyyy-MM-dd");
+  const akhir = new Date(date);
+  const dates = getDatesAround(akhir);
+
   return (
     <div className="flex items-center justify-between space-x-2 sm:space-x-3 md:space-x-3">
-      <Date day="Mon" date={13} active={false} />
-      <Date day="Tue" date={14} active={false} />
-      <Date day="Wed" date={15} active={false} />
-      <Date day="Thu" date={16} active={true} />
-      <Date day="Fri" date={17} active={false} />
-      <Date day="Sat" date={18} active={false} />
-      <Date day="Sun" date={19} active={false} />
+      {/* <EachDate day="Mon" date={13} active={false} /> */}
+      {/* <EachDate day="Tue" date={14} active={false} />
+      <EachDate day="Wed" date={15} active={false} />
+      <EachDate day="Thu" date={16} active={true} />
+      <EachDate day="Fri" date={17} active={false} />
+      <EachDate day="Sat" date={18} active={false} />
+      <EachDate day="Sun" date={19} active={false} /> */}
+      {dates &&
+        dates.map((value, key) => {
+          return (
+            <EachDate
+              key={key}
+              day={days[value.getDay()]}
+              date={value.getDate()}
+              active={key === 3 ? true : false}
+            />
+          );
+        })}
     </div>
   );
 }
 
-function Date(props: { day: string; date: number; active: boolean }) {
+function EachDate(props: { day: string; date: number; active: boolean }) {
   return (
     <div className="flex flex-col items-center w-full">
       <p
