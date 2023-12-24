@@ -5,14 +5,15 @@ import Footer from "./Footer";
 import Header from "./Header";
 import EachDate from "./EachDate";
 import { Habit as HabitType } from "@prisma/client";
-import { HabitWithKategori } from "@/libs/db/services";
+import { HabitWithKategori, getKategori } from "@/libs/db/services";
 import { getTodaysAround } from "./actions";
 
 export default async function Habit({ habit }: { habit: HabitWithKategori }) {
   const dates = getDatesAround(new Date());
   const day = new Day();
+  const kategori = await getKategori();
   return (
-    <div className="bg-zinc-900 rounded-xl px-5 py-3 flex flex-col mt-0 gap-2">
+    <div className="bg-zinc-900 rounded-xl px-5 py-3 mb-3 flex flex-col mt-0 gap-2">
       {/* Header */}
       <Header habit={habit} />
       {/* Body */}

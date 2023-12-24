@@ -25,6 +25,7 @@ model User {
   kota          String
   roles         UsersOnRoles[]
   habits        Habit[]
+  last_login    DateTime       @default(now())
 }
 
 model UsersOnRoles {

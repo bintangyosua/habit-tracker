@@ -2,6 +2,7 @@
 
 import prisma from "@/libs/db/prisma";
 import { User } from "@prisma/client";
+import { toZeroZero } from "../Main/Today/actions";
 
 export async function createUser(data: Omit<User, "id">) {
   try {
@@ -33,7 +34,21 @@ export async function signIn(email: string, password: string) {
         password,
       },
     });
-    return user ? true : false;
+    if (user) {
+      const date = new Date();
+      date.setHours(date.getHours() + 7);
+      await prisma.user.update({
+        where: {
+          email,
+        },
+        data: {
+          last_login: date,
+        },
+      });
+      return true;
+    }
+
+    return false;
   } catch (error) {
     return false;
   }

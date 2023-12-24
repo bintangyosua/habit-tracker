@@ -97,6 +97,15 @@ export const editCategory = async (data: Kategori) => {
   });
 };
 
+export const updateHabit = async (data: Habit) => {
+  return await prisma.habit.update({
+    where: {
+      id: data.id,
+    },
+    data,
+  });
+};
+
 // export type TodayWithHabit = ReturnType<typeof getToday>;
 // export type HabitWithKategori = ReturnType<typeof getHabit>;
 export type HabitWithKategori = {
