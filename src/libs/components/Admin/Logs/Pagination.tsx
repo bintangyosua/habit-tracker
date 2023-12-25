@@ -20,10 +20,13 @@ export default function Pagination({
   return (
     <div className="flex justify-center gap-1 items-center">
       {itemNumbers.map((number) => (
-        <Button size="2" variant="outline" color="gray" key={number}>
-          <a href="#" onClick={() => paginate(number)}>
-            {number}
-          </a>
+        <Button
+          size="2"
+          variant="outline"
+          color="gray"
+          key={number}
+          onClick={() => paginate(number)}>
+          {number}
         </Button>
       ))}
     </div>
