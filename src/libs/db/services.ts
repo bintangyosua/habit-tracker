@@ -183,6 +183,48 @@ export const updateUser = async (
   });
 };
 
+export const getAllHari = async () => {
+  return await prisma.hari.findMany({
+    orderBy: {
+      checkedAt: "desc",
+    },
+    select: {
+      habit: true,
+      checkedAt: true,
+      tanggal: true,
+      habitId: true,
+      checked: true,
+    },
+  });
+};
+
+export type HariWithHabit = {
+  habit: Habit;
+} & Hari;
+
+export const getAllTasks = async () => {
+  return await prisma.task.findMany({
+    orderBy: {
+      checkedAt: "desc",
+    },
+    select: {
+      id: true,
+      nama: true,
+      deskripsi: true,
+      deadline: true,
+      userId: true,
+      checked: true,
+      checkedAt: true,
+      kategoriId: true,
+      kategori: true,
+    },
+  });
+};
+
+export type TasksWithKategori = {
+  kategori: Kategori;
+} & Task;
+
 // export type TodayWithHabit = ReturnType<typeof getToday>;
 // export type HabitWithKategori = ReturnType<typeof getHabit>;
 export type HabitWithKategori = {
