@@ -19,7 +19,9 @@ export default async function Navbar() {
       <div className="flex flex-row justify-between py-4 px-3 xl:w-2/3 mx-auto">
         <div className="flex items-center space-x-5">
           <BsReverseLayoutSidebarInsetReverse size={30} color="#dc2626" />
-          <Title />
+          <a href="/">
+            <Title />
+          </a>
         </div>
         <div className="flex items-center space-x-5">
           <span>{user?.nama}</span>

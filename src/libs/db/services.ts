@@ -1,6 +1,6 @@
 "use server";
 
-import { Habit, Kategori, Hari } from "@prisma/client";
+import { Habit, Kategori, Hari, Task, User } from "@prisma/client";
 import prisma from "./prisma";
 import getDay from "date-fns/getDay/index.js";
 
@@ -97,6 +97,84 @@ export const editCategory = async (data: Kategori) => {
   });
 };
 
+export const updateHabit = async (data: Habit) => {
+  return await prisma.habit.update({
+    where: {
+      id: data.id,
+    },
+    data,
+  });
+};
+
+export const createTask = async (data: Omit<Task, "id">) => {
+  return await prisma.task.create({
+    data,
+  });
+};
+
+export const getTasks = async (userId: number) => {
+  return await prisma.task.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      kategori: true,
+    },
+  });
+};
+
+export const checkTask = async (taskId: number, checked: boolean) => {
+  return await prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data: {
+      checked: checked,
+    },
+  });
+};
+
+export const deleteTask = async (taskId: number) => {
+  return await prisma.task.delete({
+    where: {
+      id: taskId,
+    },
+  });
+};
+
+export const updateTask = async (task: Omit<Task, "checked">) => {
+  return await prisma.task.update({
+    where: {
+      id: task.id,
+    },
+    data: {
+      deadline: task.deadline,
+      deskripsi: task.deskripsi,
+      kategoriId: task.kategoriId,
+      nama: task.nama,
+    },
+  });
+};
+
+export const getUser = async (id: number) => {
+  return await prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+};
+
+export const updateUser = async (
+  user: Omit<User, "last_login" | "password">
+) => {
+  return await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: user,
+  });
+};
+
 // export type TodayWithHabit = ReturnType<typeof getToday>;
 // export type HabitWithKategori = ReturnType<typeof getHabit>;
 export type HabitWithKategori = {
@@ -107,3 +185,6 @@ export type TodayWithHabit = {
     kategori: Kategori;
   } & Habit;
 } & Hari;
+export type TaskWithKategori = {
+  kategori: Kategori;
+} & Task;
