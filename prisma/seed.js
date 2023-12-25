@@ -53,17 +53,17 @@ async function main() {
       },
       {
         nama: "Kesehatan",
-        warna: "aabbcc",
+        warna: "#aabbcc",
         svgIcon: svg,
       },
       {
         nama: "Sosial",
-        warna: "ddeefff",
+        warna: "#ddeeff",
         svgIcon: svg,
       },
       {
         nama: "Keuangan",
-        warna: "112233",
+        warna: "#112233",
         svgIcon: svg,
       },
     ],
