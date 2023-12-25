@@ -221,12 +221,54 @@ export const getAllTasks = async () => {
   });
 };
 
+export const getHabitCountKategori = async (
+  kategoriId: number,
+  rentang1: number,
+  rentang2: number
+) => {
+  const today = new Date();
+  today.setFullYear(today.getFullYear() - rentang1);
+  const tenYearsAgo = new Date();
+  tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - rentang2);
+  return await prisma.habit.count({
+    where: {
+      kategoriId,
+      user: {
+        tanggal_lahir: {
+          lte: today,
+          gte: tenYearsAgo,
+        },
+      },
+    },
+  });
+};
+
+export const getTaskCountKategori = async (
+  kategoriId: number,
+  rentang1: number,
+  rentang2: number
+) => {
+  const today = new Date();
+  today.setFullYear(today.getFullYear() - rentang1);
+  const tenYearsAgo = new Date();
+  tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - rentang2);
+  return await prisma.task.count({
+    where: {
+      kategoriId,
+      user: {
+        tanggal_lahir: {
+          lte: today,
+          gte: tenYearsAgo,
+        },
+      },
+    },
+  });
+};
+
 export type TasksWithKategori = {
   kategori: Kategori;
 } & Task;
 
-// export type TodayWithHabit = ReturnType<typeof getToday>;
-// export type HabitWithKategori = ReturnType<typeof getHabit>;
 export type HabitWithKategori = {
   kategori: Kategori;
 } & Habit;
