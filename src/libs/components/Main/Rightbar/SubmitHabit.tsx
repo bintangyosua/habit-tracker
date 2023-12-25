@@ -93,7 +93,7 @@ export default function SubmitHabit(props: { kategori: Kategori[] }) {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <Button variant="soft" color="green" className="w-full">
+        <Button variant="soft" color="green" className="xl:w-1/2 w-full">
           <svg
             width="15"
             height="15"
@@ -106,7 +106,7 @@ export default function SubmitHabit(props: { kategori: Kategori[] }) {
               fillRule="evenodd"
               clipRule="evenodd"></path>
           </svg>
-          Tambah Habit Baru
+          Tambah Habit
         </Button>
       </Popover.Trigger>
       <Popover.Content style={{ width: 360 }}>

@@ -17,6 +17,9 @@ export default async function DashboardLayout({
   pageName: string;
 }) {
   const session = await getSession();
+  if (!session.isSignedIn) {
+    return <h1>Harus Login</h1>;
+  }
   return (
     <main className="bg-zinc-950 h-screen flex flex-col justify-between">
       <div>

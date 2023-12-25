@@ -6,6 +6,6 @@ import { CgProfile } from "react-icons/cg";
 export const BarList = [
   [BsNewspaper, "Today", "/dashboard"],
   [IoIosMedal, "Habits", "/dashboard/habits"],
-  // [MdOutlineTaskAlt, "Tasks", "/dashboard/tasks"],
-  // [CgProfile, "Profile", "/dashboard/profile"],
+  [MdOutlineTaskAlt, "Tasks", "/dashboard/tasks"],
+  [CgProfile, "Profile", "/dashboard/profile"],
 ];
