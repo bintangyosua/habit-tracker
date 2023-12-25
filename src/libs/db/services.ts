@@ -123,13 +123,21 @@ export const getTasks = async (userId: number) => {
   });
 };
 
-export const checkTask = async (taskId: number, checked: boolean) => {
+export const checkTask = async (
+  taskId: number,
+  checked: boolean,
+  checkedAt: Date | null
+) => {
+  if (!checked) {
+    checkedAt = null;
+  }
   return await prisma.task.update({
     where: {
       id: taskId,
     },
     data: {
       checked: checked,
+      checkedAt: checkedAt,
     },
   });
 };
@@ -142,7 +150,7 @@ export const deleteTask = async (taskId: number) => {
   });
 };
 
-export const updateTask = async (task: Omit<Task, "checked">) => {
+export const updateTask = async (task: Omit<Task, "checked" | "checkedAt">) => {
   return await prisma.task.update({
     where: {
       id: task.id,
@@ -174,6 +182,48 @@ export const updateUser = async (
     data: user,
   });
 };
+
+export const getAllHari = async () => {
+  return await prisma.hari.findMany({
+    orderBy: {
+      checkedAt: "desc",
+    },
+    select: {
+      habit: true,
+      checkedAt: true,
+      tanggal: true,
+      habitId: true,
+      checked: true,
+    },
+  });
+};
+
+export type HariWithHabit = {
+  habit: Habit;
+} & Hari;
+
+export const getAllTasks = async () => {
+  return await prisma.task.findMany({
+    orderBy: {
+      checkedAt: "desc",
+    },
+    select: {
+      id: true,
+      nama: true,
+      deskripsi: true,
+      deadline: true,
+      userId: true,
+      checked: true,
+      checkedAt: true,
+      kategoriId: true,
+      kategori: true,
+    },
+  });
+};
+
+export type TasksWithKategori = {
+  kategori: Kategori;
+} & Task;
 
 // export type TodayWithHabit = ReturnType<typeof getToday>;
 // export type HabitWithKategori = ReturnType<typeof getHabit>;

@@ -8,12 +8,12 @@ import TambahKategori from "./TambahKategori";
 
 export default async function Kategori() {
   return (
-    <Theme appearance="light">
+    <>
       <div className="flex justify-between space-x-3">
         <Title className="text-3xl">Manajemen Kategori</Title>
         <TambahKategori />
       </div>
       <TableKategori />
-    </Theme>
+    </>
   );
 }

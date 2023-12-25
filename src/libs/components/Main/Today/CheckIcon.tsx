@@ -56,6 +56,7 @@ export default function CheckIcon(props: {
               habitId: props.habit.id,
               tanggal: akhir,
               checked: true,
+              checkedAt: new Date(),
             });
           } else {
             deleteToday(props.habit.id, akhir);
