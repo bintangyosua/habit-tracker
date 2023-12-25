@@ -48,7 +48,9 @@ export default function Task(props: {
           setHover(false);
         }}
         onClick={async () => {
-          await checkTask(props.task.id, !props.task.checked);
+          const date = new Date();
+          date.setHours(0 + 17);
+          await checkTask(props.task.id, !props.task.checked, date);
           router.refresh();
         }}>
         <AiOutlineCheckCircle

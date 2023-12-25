@@ -65,6 +65,7 @@ model Hari {
   habitId Int
   tanggal DateTime
   checked Boolean
+  checkedAt DateTime?
 
   @@id([habitId, tanggal])
 }
@@ -77,6 +78,7 @@ model Task {
   kategoriId Int
   deskripsi  String
   userId     Int
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  checked     Boolean  @default(false)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  checked    Boolean  @default(false)
+  checkedAt  DateTime?
 }

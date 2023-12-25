@@ -22,14 +22,14 @@ export default function EditTask(props: { kategori: Kategori[]; task: Task }) {
   const currentDate = new Date();
   currentDate.setHours(26);
   const [kategori, setKategori] = useState<Kategori[]>(props.kategori);
-  const [task, setTask] = useState<Omit<Task, "id" | "kategoriId" | "checked">>(
-    {
-      nama: props.task.nama,
-      deskripsi: props.task.deskripsi,
-      userId: props.task.userId,
-      deadline: props.task.deadline,
-    }
-  );
+  const [task, setTask] = useState<
+    Omit<Task, "id" | "kategoriId" | "checked" | "checkedAt">
+  >({
+    nama: props.task.nama,
+    deskripsi: props.task.deskripsi,
+    userId: props.task.userId,
+    deadline: props.task.deadline,
+  });
 
   const [editHover, setEditHover] = useState(false);
   const router = useRouter();
