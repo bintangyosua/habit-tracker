@@ -58,7 +58,7 @@ async function main() {
       },
       {
         nama: "Sosial",
-        warna: "#ddeefff",
+        warna: "#ddeeff",
         svgIcon: svg,
       },
       {
