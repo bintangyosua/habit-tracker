@@ -20,7 +20,7 @@ export default async function Logs() {
   return (
     <>
       <div className="flex justify-between space-x-3">
-        <Title className="text-3xl">Log Aktifitas</Title>
+        <Title className="text-3xl">Log Aktivitas</Title>
       </div>
       <div>
         <TabGroup>
