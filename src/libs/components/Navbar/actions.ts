@@ -4,7 +4,7 @@ import prisma from "@/libs/db/prisma";
 import { User } from "@prisma/client";
 import { toZeroZero } from "../Main/Today/actions";
 
-export async function createUser(data: Omit<User, "id">) {
+export async function createUser(data: Omit<User, "id" | "last_login">) {
   try {
     const req = await prisma.user.create({
       data,

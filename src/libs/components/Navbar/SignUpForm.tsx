@@ -11,7 +11,7 @@ import { setSession as setServerSession } from "@/libs/auth/session";
 import { useSession } from "@/libs/zustand/Session";
 
 export default function SignUpForm() {
-  const [user, setUser] = useState<Omit<User, "id">>({
+  const [user, setUser] = useState<Omit<User, "id" | "last_login">>({
     nama: " ",
     email: " ",
     password: " ",

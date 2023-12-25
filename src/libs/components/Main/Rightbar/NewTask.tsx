@@ -25,7 +25,9 @@ export default function NewTask(props: { kategori: Kategori[] }) {
   const currentDate = new Date();
   currentDate.setHours(26);
   const [kategori, setKategori] = useState<Kategori[]>(props.kategori);
-  const [task, setTask] = useState<Omit<Task, "id" | "kategoriId">>({
+  const [task, setTask] = useState<
+    Omit<Task, "id" | "kategoriId" | "checkedAt">
+  >({
     nama: " ",
     deskripsi: " ",
     userId: 0,

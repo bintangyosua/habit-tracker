@@ -1,15 +1,11 @@
 "use client";
 
-import {
-  deleteSession as deleteServerSession,
-  getSession,
-} from "@/libs/auth/session";
+import { deleteSession as deleteServerSession } from "@/libs/auth/session";
 import { Button } from "@radix-ui/themes";
 import { toast } from "react-toastify";
 import { useSession } from "../../zustand/Session";
 
 export default function SignOut() {
-  const { deleteSession } = useSession((state) => state);
   return (
     <Button
       color="crimson"

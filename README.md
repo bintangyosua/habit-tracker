@@ -9,10 +9,9 @@ Aplikasi Habit Tracker berbasis Web
 3. Selelah itu, masuk ke direktori projek (root dari projek).
 4. Ketikkan `npm install`
 5. Lalu `npm run migrate`
-6. Setelah itu akan disuruh mengetikkan nama migrasi, namai saja `first migration`
-7. Setelah itu ketikkan `npm run seed`
-8. Lalu `npm run dev`
-9. Masuk ke url berikut: `http://localhost:3000`
+6. Setelah itu ketikkan `npm run seed`
+7. Lalu `npm run dev`
+8. Masuk ke url berikut: `http://localhost:3000`
 
 ## Tutorial Membuka Dashboard Prisma
 

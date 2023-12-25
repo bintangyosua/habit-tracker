@@ -1,3 +1,4 @@
+import Hero from "@/libs/components/Hero";
 import Navbar from "@/libs/components/Navbar/Navbar";
 import { ToastContainer } from "react-toastify";
 
@@ -6,9 +7,10 @@ export default function Home() {
     title: "Today",
   };
   return (
-    <main className="bg-zinc-100 h-screen flex flex-col justify-start text-black">
+    <main className="bg-black h-screen flex flex-col justify-start text-black ">
       <ToastContainer position="top-center" theme="dark" />
       <Navbar />
+      <Hero />
     </main>
   );
 }

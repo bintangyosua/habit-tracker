@@ -106,7 +106,7 @@ export const updateHabit = async (data: Habit) => {
   });
 };
 
-export const createTask = async (data: Omit<Task, "id">) => {
+export const createTask = async (data: Omit<Task, "id" | "checkedAt">) => {
   return await prisma.task.create({
     data,
   });
@@ -263,6 +263,22 @@ export const getTaskCountKategori = async (
       },
     },
   });
+};
+
+export const checkAdmin = async (userId: number) => {
+  try {
+    const user = await prisma.usersOnRoles.findFirst({
+      where: {
+        userId: userId,
+        roleId: 1,
+      },
+    });
+
+    return user ? true : false;
+  } catch (error) {
+    return false;
+  }
+  return;
 };
 
 export type TasksWithKategori = {

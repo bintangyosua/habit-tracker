@@ -19,8 +19,9 @@ export default async function TableUser() {
           <TableRow>
             <TableHeaderCell className="p-4">#</TableHeaderCell>
             <TableHeaderCell>Nama</TableHeaderCell>
+            <TableHeaderCell>Email</TableHeaderCell>
+            <TableHeaderCell>Kota</TableHeaderCell>
             <TableHeaderCell>Last Login</TableHeaderCell>
-            <TableHeaderCell>Actions</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -34,13 +35,16 @@ export default async function TableUser() {
                     <Text>{item.nama}</Text>
                   </TableCell>
                   <TableCell>
+                    <Text>{item.email}</Text>
+                  </TableCell>
+                  <TableCell>
+                    <Text>{item.kota}</Text>
+                  </TableCell>
+                  <TableCell>
                     <Text>{`${format(
                       item.last_login,
                       "dd MMM yyyy HH:mm"
                     )} `}</Text>
-                  </TableCell>
-                  <TableCell>
-                    <Text>Edit | Delete</Text>
                   </TableCell>
                 </TableRow>
               );

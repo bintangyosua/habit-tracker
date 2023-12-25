@@ -111,15 +111,7 @@ export default function SubmitHabit(props: { kategori: Kategori[] }) {
       </Popover.Trigger>
       <Popover.Content style={{ width: 360 }}>
         <Flex gap="3">
-          <Avatar
-            size="2"
-            src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
-            fallback="A"
-            radius="full"
-          />
           <Box grow="1">
-            <h1 className="font-semibold">Tambah Habit</h1>
-            <p>Isi form di bawah ini</p>
             <Flex direction="column" gap="3">
               <label>
                 <Text as="div" size="2" mb="1" weight="bold">
