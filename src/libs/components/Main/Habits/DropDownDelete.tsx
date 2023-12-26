@@ -1,15 +1,9 @@
 "use client";
 
-import {
-  HabitWithKategori,
-  createHabit,
-  getKategori,
-  updateHabit,
-} from "@/libs/db/services";
+import { HabitWithKategori, updateHabit } from "@/libs/db/services";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import {
   AlertDialog,
-  Avatar,
   Box,
   Button,
   DropdownMenu,
@@ -20,6 +14,7 @@ import {
   TextArea,
   TextField,
 } from "@radix-ui/themes";
+import prisma from "@/libs/db/prisma";
 import { BiDotsVertical } from "react-icons/bi";
 import { deleteHabitById } from "./actions";
 import { useHabit } from "@/libs/zustand/Habit";
@@ -91,6 +86,7 @@ function EditHabit(props: { habit: HabitWithKategori; kategori: Kategori[] }) {
   async function handleSubmit() {
     if (enabled) {
       try {
+        habit.tanggalMulai.setDate(habit.tanggalMulai.getDate());
         const editedHabit = await updateHabit({
           id: props.habit.id,
           nama: habit.nama,
@@ -99,7 +95,6 @@ function EditHabit(props: { habit: HabitWithKategori; kategori: Kategori[] }) {
           userId: habit.userId,
           tanggalMulai: habit.tanggalMulai,
         });
-        // console.log({ editedHabit });
         if (editedHabit) {
           toast.success(`Berhasil mengedit habit ${habit.nama}`);
           router.refresh();

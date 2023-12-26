@@ -10,7 +10,7 @@ import { Kategori } from "@prisma/client";
 export default async function Footer({ habit }: { habit: HabitWithKategori }) {
   const startDate = habit.tanggalMulai.getDate();
   const endDate = new Date();
-  endDate.setHours(0 + 7, 0, 0, 0);
+  endDate.setHours(0, 0, 0, 0);
 
   const todays = await prisma?.hari.findMany({
     where: {
@@ -20,10 +20,10 @@ export default async function Footer({ habit }: { habit: HabitWithKategori }) {
 
   const kategori = await getKategori();
 
-  const different = endDate.getDate() - startDate;
+  const different = endDate.getDate() - startDate + 1;
 
-  const ratio = todays?.length || (0 / different) * 1.0;
-  const percentage = ratio / different;
+  const ratio = todays?.length ? (todays.length / different) * 1.0 : 0;
+  const percentage = ratio === 0 ? 0 : ratio;
 
   const iconSize = 20;
   return (

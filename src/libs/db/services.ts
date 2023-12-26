@@ -98,7 +98,13 @@ export const editCategory = async (data: Kategori) => {
 };
 
 export const updateHabit = async (data: Habit) => {
-  console.log({ data });
+  await prisma.hari.deleteMany({
+    where: {
+      tanggal: {
+        lt: data.tanggalMulai,
+      },
+    },
+  });
   return await prisma.habit.update({
     where: {
       id: data.id,
