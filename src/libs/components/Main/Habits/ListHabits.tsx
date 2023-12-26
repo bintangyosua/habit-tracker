@@ -3,6 +3,7 @@
 import Habit from "./Habit";
 import { HabitWithKategori } from "@/libs/db/services";
 import { ScrollArea } from "@radix-ui/themes";
+import CalloutComponent from "../Atomic/CalloutComponent";
 
 export default async function ListHabits({
   habits,
@@ -14,7 +15,7 @@ export default async function ListHabits({
       {habits.length > 0 ? (
         habits.map((val) => <Habit key={val.id} habit={val} />)
       ) : (
-        <h1 className="text-white text-3xl">Belum memiliki Habit</h1>
+        <CalloutComponent message="Belum memiliki Habit" />
       )}
     </ScrollArea>
   );

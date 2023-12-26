@@ -47,16 +47,14 @@ export default function CheckIcon(props: {
         width={40}
         height={40}
         onClick={() => {
-          console.log({
-            habitId: props.habit.id,
-            tanggal: akhir,
-          });
           if (!checked) {
+            const date = new Date();
+            date.setHours(date.getHours() + 7);
             createToday({
               habitId: props.habit.id,
               tanggal: akhir,
               checked: true,
-              checkedAt: new Date(),
+              checkedAt: date,
             });
           } else {
             deleteToday(props.habit.id, akhir);

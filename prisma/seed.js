@@ -38,32 +38,32 @@ async function main() {
     data: [
       {
         nama: "Olahraga",
-        warna: "#ff33dd",
+        warna: "#7BD3EA",
         svgIcon: svg,
       },
       {
         nama: "Hobi",
-        warna: "#ff33dd",
+        warna: "#A1EEBD",
         svgIcon: svg,
       },
       {
         nama: "Pekerjaan",
-        warna: "#ababab",
+        warna: "#F6F7C4",
         svgIcon: svg,
       },
       {
         nama: "Kesehatan",
-        warna: "#aabbcc",
+        warna: "#F6D6D6",
         svgIcon: svg,
       },
       {
         nama: "Sosial",
-        warna: "#ddeeff",
+        warna: "#DC8686",
         svgIcon: svg,
       },
       {
         nama: "Keuangan",
-        warna: "#112233",
+        warna: "#7ED7C1",
         svgIcon: svg,
       },
     ],

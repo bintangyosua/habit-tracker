@@ -40,9 +40,7 @@ export default function SignInForm() {
     if (await emailExist(user.email)) {
       if (await signIn(user.email, user.password)) {
         await setServerSession(user.email);
-        // setSession();
         toast.success("Berhasil Sign In!");
-        console.log(await getSession());
       } else {
         toast.error("Password salah!");
       }

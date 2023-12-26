@@ -13,6 +13,7 @@ import {
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
+import CalloutComponent from "../../Main/Atomic/CalloutComponent";
 
 export default function TaksLogs({ tugas }: { tugas: TasksWithKategori[] }) {
   const [tasks, setTasks] = useState(tugas);
@@ -31,45 +32,50 @@ export default function TaksLogs({ tugas }: { tugas: TasksWithKategori[] }) {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   return (
     <>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableHeaderCell className="p-4">#</TableHeaderCell>
-            <TableHeaderCell>Nama</TableHeaderCell>
-            <TableHeaderCell>Deadline</TableHeaderCell>
-            <TableHeaderCell>Ditandai pada</TableHeaderCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {currentTodays &&
-            currentTodays.map((item, key) => (
-              <TableRow key={key}>
-                <TableCell className="p-4">{++indexOfFirstTask}</TableCell>
-                <TableCell>
-                  <Text>{item.kategori.nama}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{`${format(
-                    item.deadline,
-                    "dd MMM yyyy HH:mm"
-                  )} `}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{`${
-                    item.checkedAt === null
-                      ? ""
-                      : format(item.checkedAt, "dd MMM yyyy HH:mm")
-                  }`}</Text>
-                </TableCell>
+      {currentTodays.length > 0 ? (
+        <>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeaderCell className="p-4">#</TableHeaderCell>
+                <TableHeaderCell>Nama</TableHeaderCell>
+                <TableHeaderCell>Deadline</TableHeaderCell>
+                <TableHeaderCell>Ditandai pada</TableHeaderCell>
               </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-      <Pagination
-        itemsPerPage={tasksPerPage}
-        paginate={paginate}
-        totalItems={tasks.length}
-      />
+            </TableHead>
+            <TableBody>
+              {currentTodays.map((item, key) => (
+                <TableRow key={key}>
+                  <TableCell className="p-4">{++indexOfFirstTask}</TableCell>
+                  <TableCell>
+                    <Text>{item.nama}</Text>
+                  </TableCell>
+                  <TableCell>
+                    <Text>{`${format(
+                      item.deadline,
+                      "dd MMM yyyy HH:mm"
+                    )} `}</Text>
+                  </TableCell>
+                  <TableCell>
+                    <Text>{`${
+                      item.checkedAt === null
+                        ? ""
+                        : format(item.checkedAt, "dd MMM yyyy HH:mm")
+                    }`}</Text>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Pagination
+            itemsPerPage={tasksPerPage}
+            totalItems={tasks.length}
+            paginate={paginate}
+          />
+        </>
+      ) : (
+        <CalloutComponent message="Belum ada yang menandai task" />
+      )}
     </>
   );
 }

@@ -49,7 +49,7 @@ export default function Task(props: {
         }}
         onClick={async () => {
           const date = new Date();
-          date.setHours(0 + 17);
+          date.setHours(date.getHours() + 7);
           await checkTask(props.task.id, !props.task.checked, date);
           router.refresh();
         }}>

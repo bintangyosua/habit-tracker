@@ -23,6 +23,7 @@ import { createTask } from "@/libs/db/services";
 
 export default function NewTask(props: { kategori: Kategori[] }) {
   const currentDate = new Date();
+  currentDate.setHours(currentDate.getHours() + 7);
   currentDate.setHours(26);
   const [kategori, setKategori] = useState<Kategori[]>(props.kategori);
   const [task, setTask] = useState<
@@ -58,7 +59,6 @@ export default function NewTask(props: { kategori: Kategori[] }) {
       [name]: name === "deadline" ? new Date(value) : value,
       userId: session.id,
     });
-    console.log(task);
   }
 
   async function handleSubmit() {

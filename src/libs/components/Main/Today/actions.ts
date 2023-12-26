@@ -7,7 +7,7 @@ export function getCurrentDate() {
 }
 
 export function toZeroZero(date: Date) {
-  date.setHours(0 + 7, 0, 0, 0);
+  date.setHours(0, 0, 0, 0);
   return date;
 }
 

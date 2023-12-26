@@ -35,8 +35,6 @@ export default async function Footer({ habit }: { habit: HabitWithKategori }) {
         <span>{Math.round((percentage + Number.EPSILON) * 100)}%</span>
       </div>
       <div className="flex justify-between items-center space-x-3">
-        <IoStatsChart size={iconSize} />
-        <BsCalendar2Week size={iconSize} />
         <DropDownDelete habit={habit} kategori={kategori} />
       </div>
     </div>

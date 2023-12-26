@@ -51,7 +51,6 @@ export default function EditTask(props: { kategori: Kategori[]; task: Task }) {
       [name]: name === "deadline" ? new Date(value) : value,
       userId: session.id,
     });
-    console.log(task);
   }
 
   async function handleSubmit() {
@@ -123,7 +122,6 @@ export default function EditTask(props: { kategori: Kategori[]; task: Task }) {
                   placeholder="Masukkan deadline"
                   defaultValue={format(task.deadline, "yyyy-MM-dd'T'HH:mm")}
                   name="deadline"
-                  //   defaultValue={currentDate.toISOString().slice(0, 16)}
                   type="datetime-local"
                   color="yellow"
                   onChange={handleInputChange}

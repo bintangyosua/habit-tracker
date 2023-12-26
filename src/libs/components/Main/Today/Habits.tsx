@@ -20,16 +20,17 @@ import CheckIcon from "./CheckIcon";
 import UpdateHabits from "./UpdateHabits";
 import { getCurrentDate } from "./actions";
 import Habit from "./Habit";
+import CalloutComponent from "../Atomic/CalloutComponent";
 
 export default async function Habits() {
   const session = await getSession();
   const habits = await getHabits(session.id);
   return (
     <div className="flex flex-col py-5">
-      {habits ? (
+      {habits[0] ? (
         <UpdateHabits session={session} habits={habits} />
       ) : (
-        <p>Habit tidak ditemukan</p>
+        <CalloutComponent message="Belum memiliki Habit" />
       )}
     </div>
   );

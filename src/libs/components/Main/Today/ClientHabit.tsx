@@ -28,7 +28,6 @@ export default function ClientHabit(props: {
 
   useEffect(() => {
     getToday(props.habit.id, akhir).then((res: Hari | null) => {
-      console.log({ res });
       setToday(res);
     });
   }, [tgl]);

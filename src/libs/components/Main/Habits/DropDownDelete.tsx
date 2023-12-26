@@ -61,7 +61,7 @@ function EditHabit(props: { habit: HabitWithKategori; kategori: Kategori[] }) {
   const [habit, setHabit] = useState<Omit<Habit, "id" | "kategoriId">>({
     nama: props.habit.nama,
     deskripsi: props.habit.deskripsi,
-    userId: props.habit.id,
+    userId: props.habit.userId,
     tanggalMulai: props.habit.tanggalMulai,
   });
 
@@ -90,24 +90,25 @@ function EditHabit(props: { habit: HabitWithKategori; kategori: Kategori[] }) {
 
   async function handleSubmit() {
     if (enabled) {
-      if (
-        await updateHabit({
+      try {
+        const editedHabit = await updateHabit({
           id: props.habit.id,
           nama: habit.nama,
           kategoriId: parseInt(String(select)),
           deskripsi: habit.deskripsi,
           userId: habit.userId,
           tanggalMulai: habit.tanggalMulai,
-        })
-      ) {
-        toast.success(`Berhasil mengedit habit ${habit.nama}`);
-        setNewHabit(true);
-        router.refresh();
-      } else {
+        });
+        // console.log({ editedHabit });
+        if (editedHabit) {
+          toast.success(`Berhasil mengedit habit ${habit.nama}`);
+          router.refresh();
+        } else {
+          toast.error(`Gagal mengedit habit ${habit.nama}`);
+        }
+      } catch (error) {
         toast.error(`Gagal mengedit habit ${habit.nama}`);
       }
-    } else {
-      toast.error(`Gagal mengedit habit ${habit.nama}`);
     }
   }
 
@@ -129,12 +130,6 @@ function EditHabit(props: { habit: HabitWithKategori; kategori: Kategori[] }) {
       </Popover.Trigger>
       <Popover.Content style={{ width: 360 }}>
         <Flex gap="3">
-          <Avatar
-            size="2"
-            src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
-            fallback="A"
-            radius="full"
-          />
           <Box grow="1">
             <h1 className="font-semibold">Edit Habit</h1>
             <p>Isi form di bawah ini</p>
@@ -227,12 +222,10 @@ function EditHabit(props: { habit: HabitWithKategori; kategori: Kategori[] }) {
 }
 
 function DeleteAlert({ habit }: { habit: HabitWithKategori }) {
-  const { setNewHabit } = useHabit((state) => state);
   const router = useRouter();
 
   async function handleDelete() {
     deleteHabitById(habit);
-    setNewHabit(true);
     router.refresh();
     toast.error("Berhasil menghapus habit");
   }

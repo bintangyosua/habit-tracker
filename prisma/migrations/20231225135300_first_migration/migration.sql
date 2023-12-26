@@ -14,6 +14,7 @@ CREATE TABLE `User` (
     `password` VARCHAR(191) NOT NULL,
     `tanggal_lahir` DATETIME(3) NOT NULL,
     `kota` VARCHAR(191) NOT NULL,
+    `last_login` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -55,8 +56,23 @@ CREATE TABLE `Hari` (
     `habitId` INTEGER NOT NULL,
     `tanggal` DATETIME(3) NOT NULL,
     `checked` BOOLEAN NOT NULL,
+    `checkedAt` DATETIME(3) NULL,
 
     PRIMARY KEY (`habitId`, `tanggal`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Task` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `nama` VARCHAR(191) NOT NULL,
+    `deadline` DATETIME(3) NOT NULL,
+    `kategoriId` INTEGER NOT NULL,
+    `deskripsi` VARCHAR(191) NOT NULL,
+    `userId` INTEGER NOT NULL,
+    `checked` BOOLEAN NOT NULL DEFAULT false,
+    `checkedAt` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
@@ -73,3 +89,9 @@ ALTER TABLE `Habit` ADD CONSTRAINT `Habit_userId_fkey` FOREIGN KEY (`userId`) RE
 
 -- AddForeignKey
 ALTER TABLE `Hari` ADD CONSTRAINT `Hari_habitId_fkey` FOREIGN KEY (`habitId`) REFERENCES `Habit`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Task` ADD CONSTRAINT `Task_kategoriId_fkey` FOREIGN KEY (`kategoriId`) REFERENCES `Kategori`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Task` ADD CONSTRAINT `Task_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

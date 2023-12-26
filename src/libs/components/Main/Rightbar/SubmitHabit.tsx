@@ -64,7 +64,7 @@ export default function SubmitHabit(props: { kategori: Kategori[] }) {
 
   async function handleSubmit() {
     if (enabled) {
-      habit.tanggalMulai.setHours(0 + 7, 0, 0, 0);
+      habit.tanggalMulai.setHours(habit.tanggalMulai.getHours() + 7, 0, 0, 0);
       if (
         await createHabit({
           nama: habit.nama,
@@ -75,7 +75,6 @@ export default function SubmitHabit(props: { kategori: Kategori[] }) {
         })
       ) {
         toast.success("Berhasil membuat habit baru.");
-        setNewHabit(true);
         router.refresh();
       } else {
         toast.error("Gagal membuat habit baru.");
