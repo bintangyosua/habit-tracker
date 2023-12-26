@@ -96,7 +96,7 @@ function DeleteTask({ task }: { task: TaskType }) {
         </Button>
       </AlertDialog.Trigger>
       <AlertDialog.Content style={{ maxWidth: 450 }}>
-        <AlertDialog.Title>Hapus Task</AlertDialog.Title>
+        <AlertDialog.Title>Hapus Task {task.nama}</AlertDialog.Title>
         <AlertDialog.Description size="2">
           Apakah kamu yakin ingin menghapus task <b>{task.nama}</b>
         </AlertDialog.Description>

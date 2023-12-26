@@ -233,7 +233,7 @@ function DeleteAlert({ habit }: { habit: HabitWithKategori }) {
         </Button>
       </AlertDialog.Trigger>
       <AlertDialog.Content style={{ maxWidth: 450 }}>
-        <AlertDialog.Title>Hapus Habit _____</AlertDialog.Title>
+        <AlertDialog.Title>Hapus Habit {habit.nama}</AlertDialog.Title>
         <AlertDialog.Description size="2">
           Apakah kamu yakin?
         </AlertDialog.Description>
