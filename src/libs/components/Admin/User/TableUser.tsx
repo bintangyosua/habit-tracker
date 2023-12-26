@@ -20,6 +20,7 @@ export default async function TableUser() {
             <TableHeaderCell className="p-4">#</TableHeaderCell>
             <TableHeaderCell>Nama</TableHeaderCell>
             <TableHeaderCell>Email</TableHeaderCell>
+            <TableHeaderCell>Tanggal Lahir</TableHeaderCell>
             <TableHeaderCell>Kota</TableHeaderCell>
             <TableHeaderCell>Last Login</TableHeaderCell>
           </TableRow>
@@ -36,6 +37,12 @@ export default async function TableUser() {
                   </TableCell>
                   <TableCell>
                     <Text>{item.email}</Text>
+                  </TableCell>
+                  <TableCell>
+                    <Text>{`${format(
+                      item.tanggal_lahir,
+                      "dd MMM yyyy"
+                    )}`}</Text>
                   </TableCell>
                   <TableCell>
                     <Text>{item.kota}</Text>

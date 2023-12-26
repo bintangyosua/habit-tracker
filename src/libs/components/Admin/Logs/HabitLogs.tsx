@@ -42,6 +42,7 @@ export default function HabitLogs({ hari }: { hari: HariWithHabit[] }) {
               <TableRow>
                 <TableHeaderCell className="p-4">#</TableHeaderCell>
                 <TableHeaderCell>Nama</TableHeaderCell>
+                <TableHeaderCell>Tipe</TableHeaderCell>
                 <TableHeaderCell>Dimulai pada</TableHeaderCell>
                 <TableHeaderCell>Ditandai pada</TableHeaderCell>
               </TableRow>
@@ -52,6 +53,9 @@ export default function HabitLogs({ hari }: { hari: HariWithHabit[] }) {
                   <TableCell className="p-4">{++indexOfFirstToday}</TableCell>
                   <TableCell>
                     <Text>{item.habit.nama}</Text>
+                  </TableCell>
+                  <TableCell>
+                    <Text>Habit</Text>
                   </TableCell>
                   <TableCell>
                     <Text>{`${format(

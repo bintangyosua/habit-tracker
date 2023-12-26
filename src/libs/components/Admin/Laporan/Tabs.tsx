@@ -77,7 +77,7 @@ async function HabitPanel(props: {
     <Flex key={props.kategori.id}>
       <Text className="w-full">{props.kategori.nama}</Text>
       <Flex className="space-x-2" justifyContent="end">
-        <Text>{habitReport}</Text>
+        <Text>{habitReport} User</Text>
       </Flex>
     </Flex>
   );
@@ -97,7 +97,7 @@ async function TaskPanel(props: {
     <Flex key={props.kategori.id}>
       <Text className="w-full">{props.kategori.nama}</Text>
       <Flex className="space-x-2" justifyContent="end">
-        <Text>{taskReport}</Text>
+        <Text>{taskReport} User</Text>
       </Flex>
     </Flex>
   );

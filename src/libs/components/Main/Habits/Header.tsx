@@ -28,7 +28,8 @@ export default function Header({ habit }: { habit: HabitWithKategori }) {
         <span
           className={`text-sm`}
           style={{ color: `${habit.kategori?.warna}` }}>
-          {habit.kategori.nama}
+          {habit.kategori.nama}{" "}
+          <span className="text-sm text-gray-300">{habit.deskripsi}</span>
         </span>
         <span></span>
       </div>

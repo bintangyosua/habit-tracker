@@ -39,6 +39,7 @@ export default function TaksLogs({ tugas }: { tugas: TasksWithKategori[] }) {
               <TableRow>
                 <TableHeaderCell className="p-4">#</TableHeaderCell>
                 <TableHeaderCell>Nama</TableHeaderCell>
+                <TableHeaderCell>Tipe</TableHeaderCell>
                 <TableHeaderCell>Deadline</TableHeaderCell>
                 <TableHeaderCell>Ditandai pada</TableHeaderCell>
               </TableRow>
@@ -46,23 +47,32 @@ export default function TaksLogs({ tugas }: { tugas: TasksWithKategori[] }) {
             <TableBody>
               {currentTodays.map((item, key) => (
                 <TableRow key={key}>
-                  <TableCell className="p-4">{++indexOfFirstTask}</TableCell>
-                  <TableCell>
-                    <Text>{item.nama}</Text>
-                  </TableCell>
-                  <TableCell>
-                    <Text>{`${format(
-                      item.deadline,
-                      "dd MMM yyyy HH:mm"
-                    )} `}</Text>
-                  </TableCell>
-                  <TableCell>
-                    <Text>{`${
-                      item.checkedAt === null
-                        ? ""
-                        : format(item.checkedAt, "dd MMM yyyy HH:mm")
-                    }`}</Text>
-                  </TableCell>
+                  {item.checked && (
+                    <>
+                      <TableCell className="p-4">
+                        {++indexOfFirstTask}
+                      </TableCell>
+                      <TableCell>
+                        <Text>{item.nama}</Text>
+                      </TableCell>
+                      <TableCell>
+                        <Text>Task</Text>
+                      </TableCell>
+                      <TableCell>
+                        <Text>{`${format(
+                          item.deadline,
+                          "dd MMM yyyy HH:mm"
+                        )} `}</Text>
+                      </TableCell>
+                      <TableCell>
+                        <Text>{`${
+                          item.checkedAt === null
+                            ? ""
+                            : format(item.checkedAt, "dd MMM yyyy HH:mm")
+                        }`}</Text>
+                      </TableCell>
+                    </>
+                  )}
                 </TableRow>
               ))}
             </TableBody>
