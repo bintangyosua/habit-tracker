@@ -8,7 +8,7 @@ export default async function Laporan() {
       <div className="flex justify-between space-x-3 ">
         <Title className="text-3xl">Laporan Data Habit dan Task</Title>
       </div>
-      <Flex wrap={"wrap"} gap={"3"}>
+      <Flex wrap={"wrap"} gap={"3"} justify={"center"}>
         <Tabs rentang1={0} rentang2={10} />
         <Tabs rentang1={10} rentang2={20} />
         <Tabs rentang1={20} rentang2={30} />
